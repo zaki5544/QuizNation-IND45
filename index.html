@@ -15,7 +15,9 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #7a1e2c 75%, #c0392b 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,7 +26,16 @@
       overflow-x: hidden;
     }
 
-    /* Animated Background */
+    @keyframes gradientShift {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Animated Background Particles */
     .bg-animation {
       position: fixed;
       top: 0;
@@ -39,70 +50,197 @@
       position: absolute;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.1);
-      animation: float 20s infinite;
+      animation: float 20s infinite ease-in-out;
     }
 
     .circle:nth-child(1) {
-      width: 80px;
-      height: 80px;
-      top: 10%;
-      left: 10%;
+      width: 100px;
+      height: 100px;
+      top: 15%;
+      left: 15%;
       animation-delay: 0s;
+      background: radial-gradient(circle, rgba(30, 60, 114, 0.3), transparent);
     }
 
     .circle:nth-child(2) {
-      width: 120px;
-      height: 120px;
-      top: 70%;
-      left: 80%;
+      width: 150px;
+      height: 150px;
+      top: 60%;
+      left: 75%;
       animation-delay: 4s;
+      background: radial-gradient(circle, rgba(122, 30, 44, 0.3), transparent);
     }
 
     .circle:nth-child(3) {
-      width: 60px;
-      height: 60px;
-      top: 40%;
-      left: 70%;
+      width: 80px;
+      height: 80px;
+      top: 35%;
+      left: 65%;
       animation-delay: 2s;
+      background: radial-gradient(circle, rgba(42, 82, 152, 0.3), transparent);
     }
 
     .circle:nth-child(4) {
-      width: 100px;
-      height: 100px;
-      top: 80%;
-      left: 20%;
+      width: 120px;
+      height: 120px;
+      top: 75%;
+      left: 25%;
       animation-delay: 6s;
+      background: radial-gradient(circle, rgba(192, 57, 43, 0.3), transparent);
+    }
+
+    .circle:nth-child(5) {
+      width: 90px;
+      height: 90px;
+      top: 50%;
+      left: 50%;
+      animation-delay: 3s;
+      background: radial-gradient(circle, rgba(30, 60, 114, 0.2), transparent);
     }
 
     @keyframes float {
       0%, 100% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.3;
+        transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+        opacity: 0.4;
+      }
+      25% {
+        transform: translateY(-30px) translateX(30px) rotate(90deg) scale(1.1);
+        opacity: 0.6;
       }
       50% {
-        transform: translateY(-30px) rotate(180deg);
+        transform: translateY(-60px) translateX(-30px) rotate(180deg) scale(1);
+        opacity: 0.5;
+      }
+      75% {
+        transform: translateY(-30px) translateX(30px) rotate(270deg) scale(1.1);
         opacity: 0.6;
       }
     }
 
+    /* Sparkles Animation */
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 3s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     .container {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(20px);
       width: 100%;
       max-width: 520px;
       border-radius: 30px;
       padding: 45px 40px;
       text-align: center;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 100px rgba(122, 30, 44, 0.2);
       position: relative;
       z-index: 1;
-      animation: slideUp 0.6s ease;
+      animation: slideUp 0.6s ease, glow 3s infinite;
+      border: 2px solid rgba(255, 255, 255, 0.3);
     }
 
     @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 100px rgba(122, 30, 44, 0.2);
+      }
+      50% {
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 100px rgba(30, 60, 114, 0.3);
+      }
+    }
+
+    .logo {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      animation: bounce 2s infinite, rotate 10s linear infinite;
+      filter: drop-shadow(0 5px 15px rgba(122, 30, 44, 0.3));
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-15px) rotate(5deg);
+      }
+    }
+
+    @keyframes rotate {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(5deg);
+      }
+    }
+
+    h1 {
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c, #c0392b);
+      background-size: 200% 200%;
+      animation: gradientText 3s ease infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.8rem;
+      margin-bottom: 8px;
+      font-weight: 900;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes gradientText {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      animation: fadeIn 1s ease;
+    }
+
+    p {
+      color: #777;
+      margin-bottom: 35px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
       to {
         opacity: 1;
@@ -110,46 +248,7 @@
       }
     }
 
-    .logo {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    h1 {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: 2.5rem;
-      margin-bottom: 8px;
-      font-weight: 900;
-    }
-
-    .subtitle {
-      color: #666;
-      margin-bottom: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    p {
-      color: #888;
-      margin-bottom: 35px;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    /* Stats Section */
+    /* Stats Section with enhanced animation */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -158,31 +257,238 @@
     }
 
     .stat-box {
-      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-      border-radius: 15px;
-      padding: 15px 10px;
-      transition: transform 0.3s ease;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      border-radius: 18px;
+      padding: 18px 12px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      animation: popIn 0.6s ease backwards;
+    }
+
+    .stat-box:nth-child(1) { animation-delay: 0.1s; }
+    .stat-box:nth-child(2) { animation-delay: 0.2s; }
+    .stat-box:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -50%;
+      }
+      100% {
+        left: 150%;
+      }
     }
 
     .stat-box:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(122, 30, 44, 0.4);
     }
 
     .stat-number {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #667eea;
+      font-size: 2rem;
+      font-weight: 900;
+      color: white;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .stat-label {
       font-size: 0.75rem;
-      color: #666;
+      color: rgba(255, 255, 255, 0.9);
       font-weight: 600;
       text-transform: uppercase;
       margin-top: 5px;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Level Cards */
+    /* Enhanced Progress Section */
+    .progress-section {
+      background: linear-gradient(135deg, #7a1e2c, #c0392b);
+      border-radius: 22px;
+      padding: 28px;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(122, 30, 44, 0.4);
+      animation: slideIn 0.8s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .progress-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
+      animation: float 12s infinite ease-in-out;
+    }
+
+    .progress-section::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -15%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+      animation: float 15s infinite ease-in-out reverse;
+    }
+
+    .progress-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .progress-bar-container {
+      background: rgba(0, 0, 0, 0.2);
+      height: 24px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+      box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ffecd2, #fcb69f, #ffd89b, #fcb69f);
+      background-size: 300% 100%;
+      border-radius: 20px;
+      width: 0%;
+      position: relative;
+      animation: fillProgress 2s ease forwards, shimmerProgress 4s infinite;
+      box-shadow: 0 0 20px rgba(252, 182, 159, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+    }
+
+    .progress-bar-fill::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .progress-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      animation: slideLight 2s infinite;
+    }
+
+    @keyframes fillProgress {
+      to {
+        width: 35%;
+      }
+    }
+
+    @keyframes shimmerProgress {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes slideLight {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 200%;
+      }
+    }
+
+    .progress-text {
+      font-size: 0.9rem;
+      color: white;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .progress-number {
+      background: rgba(255, 255, 255, 0.25);
+      padding: 5px 14px;
+      border-radius: 25px;
+      font-weight: 900;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0.4);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    /* Level Cards with enhanced styles */
     .levels {
       display: flex;
       flex-direction: column;
@@ -193,21 +499,40 @@
     .level-card {
       text-decoration: none;
       display: block;
+      animation: slideInLevel 0.6s ease backwards;
+    }
+
+    .level-card:nth-child(1) { animation-delay: 0.1s; }
+    .level-card:nth-child(2) { animation-delay: 0.2s; }
+    .level-card:nth-child(3) { animation-delay: 0.3s; }
+    .level-card:nth-child(4) { animation-delay: 0.4s; }
+    .level-card:nth-child(5) { animation-delay: 0.5s; }
+    .level-card:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes slideInLevel {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .level {
       width: 100%;
-      padding: 20px;
-      border-radius: 18px;
+      padding: 22px;
+      border-radius: 20px;
       border: none;
       font-size: 1.1rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       color: #fff;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
 
     .level::before {
@@ -217,8 +542,9 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transition: left 0.5s ease;
+      background: rgba(255, 255, 255, 0.3);
+      transition: left 0.6s ease;
+      transform: skewX(-20deg);
     }
 
     .level:hover::before {
@@ -226,14 +552,20 @@
     }
 
     .level:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .level:active {
+      transform: translateY(-2px) scale(0.98);
     }
 
     .level-info {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .level-title {
@@ -243,47 +575,74 @@
     }
 
     .level-icon {
-      font-size: 1.8rem;
+      font-size: 2rem;
+      animation: wiggle 2s infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(-5deg);
+      }
+      75% {
+        transform: rotate(5deg);
+      }
     }
 
     .level-meta {
       font-size: 0.85rem;
-      opacity: 0.9;
-      font-weight: 500;
+      opacity: 0.95;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
     }
 
+    /* Level Color Schemes */
     .level-1 {
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
     }
 
     .level-2 {
-      background: linear-gradient(135deg, #f093fb, #f5576c);
+      background: linear-gradient(135deg, #7a1e2c, #c0392b);
     }
 
     .level-3 {
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
     }
 
     .level-4 {
-      background: linear-gradient(135deg, #6c4a8a, #09b26b);
+      background: linear-gradient(135deg, #2a5298, #c0392b);
     }
 
     .level-5 {
-      background: linear-gradient(135deg, #3b0547, #801c00);
+      background: linear-gradient(135deg, #0f1c36, #7a1e2c);
+    }
+
+    .level-6 {
+      background: linear-gradient(135deg, #c0392b, #1e3c72);
     }
 
     /* Features Section */
     .features {
-      background: #f8f9fa;
-      border-radius: 18px;
-      padding: 20px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 20px;
+      padding: 22px;
       margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease;
     }
 
     .features-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #333;
+      font-size: 0.95rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 15px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -292,87 +651,57 @@
     .feature-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
       text-align: left;
     }
 
     .feature-item {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-size: 0.85rem;
       color: #555;
+      padding: 8px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      background: rgba(122, 30, 44, 0.1);
+      transform: translateX(5px);
     }
 
     .feature-icon {
-      font-size: 1.2rem;
-    }
-
-    /* Progress Section */
-    .progress-section {
-      background: linear-gradient(135deg, #ffecd2, #fcb69f);
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 25px;
-    }
-
-    .progress-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #7A1E2C;
-      margin-bottom: 12px;
-    }
-
-    .progress-bar-container {
-      background: rgba(255, 255, 255, 0.6);
-      height: 12px;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 8px;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      border-radius: 10px;
-      width: 0%;
-      animation: fillProgress 2s ease forwards;
-    }
-
-    @keyframes fillProgress {
-      to {
-        width: 35%;
-      }
-    }
-
-    .progress-text {
-      font-size: 0.8rem;
-      color: #7A1E2C;
-      font-weight: 600;
+      font-size: 1.3rem;
+      animation: bounce 2s infinite;
     }
 
     footer {
       margin-top: 25px;
       padding-top: 20px;
-      border-top: 2px solid #f0f0f0;
+      border-top: 2px solid rgba(30, 60, 114, 0.1);
+      animation: fadeIn 1.5s ease;
     }
 
     .footer-text {
       font-size: 0.8rem;
-      color: #999;
-      margin-bottom: 10px;
+      color: #777;
+      margin-bottom: 12px;
+      line-height: 1.5;
     }
 
     .footer-badge {
       display: inline-block;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
       color: white;
-      padding: 6px 15px;
-      border-radius: 20px;
+      padding: 8px 18px;
+      border-radius: 25px;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
+      box-shadow: 0 5px 15px rgba(122, 30, 44, 0.3);
+      animation: wiggle 3s infinite;
     }
 
     @media (max-width: 600px) {
@@ -381,7 +710,7 @@
       }
 
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       .stats {
@@ -390,7 +719,7 @@
       }
 
       .stat-number {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
       }
 
       .feature-list {
@@ -403,7 +732,7 @@
       }
 
       .level-icon {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
       }
     }
   </style>
@@ -411,6 +740,7 @@
 <body>
 
 <div class="bg-animation">
+  <div class="circle"></div>
   <div class="circle"></div>
   <div class="circle"></div>
   <div class="circle"></div>
@@ -426,11 +756,11 @@
   <!-- Stats Section -->
   <div class="stats">
     <div class="stat-box">
-      <div class="stat-number">60</div>
+      <div class="stat-number">120</div>
       <div class="stat-label">Soal</div>
     </div>
     <div class="stat-box">
-      <div class="stat-number">3</div>
+      <div class="stat-number">6</div>
       <div class="stat-label">Level</div>
     </div>
     <div class="stat-box">
@@ -441,11 +771,16 @@
 
   <!-- Progress Section -->
   <div class="progress-section">
-    <div class="progress-title">🎯 Progress Belajar</div>
+    <div class="progress-title">
+      <span>🎯 Progress Belajar</span>
+    </div>
     <div class="progress-bar-container">
       <div class="progress-bar-fill"></div>
     </div>
-    <div class="progress-text">0 dari 20 soal terselesaikan (0%)</div>
+    <div class="progress-text">
+      <span>7 dari 20 soal terselesaikan</span>
+      <span class="progress-number">35%</span>
+    </div>
   </div>
 
   <!-- Level Selection -->
@@ -509,6 +844,18 @@
         </div>
       </button>
     </a>
+
+    <a href="lesson.html?level=6" class="level-card">
+      <button class="level level-6">
+        <div class="level-info">
+          <div class="level-title">
+            <span class="level-icon">😈</span>
+            <span>Level 6 - Fufufafa</span>
+          </div>
+          <div class="level-meta">20 Soal</div>
+        </div>
+      </button>
+    </a>
   </div>
 
   <!-- Fitur unggulan -->
@@ -517,7 +864,7 @@
     <div class="feature-list">
       <div class="feature-item">
         <span class="feature-icon">✅</span>
-        <span>100 Soal Pilihan Ganda</span>
+        <span>120 Soal Pilihan Ganda</span>
       </div>
       <div class="feature-item">
         <span class="feature-icon">⏱️</span>
@@ -544,7 +891,7 @@
 
   <footer>
     <div class="footer-text">
-      Belajar tanpa batas, kapan saja dimana saja
+      Belajar tanpa batas, kapan saja dimana saja<br>
       Soalnya duitlu kaga cukup buat langganan Duolingo Plus 😅
     </div>
     <div class="footer-badge">100% Gratis</div>
@@ -552,7 +899,22 @@
 </div>
 
 <script>
-  // Local Storage untuk menyimpan progress (opsional untuk pengembangan selanjutnya)
+  // Create sparkles
+  function createSparkles() {
+    const container = document.querySelector('.bg-animation');
+    for (let i = 0; i < 20; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.top = Math.random() * 100 + '%';
+      sparkle.style.animationDelay = Math.random() * 3 + 's';
+      container.appendChild(sparkle);
+    }
+  }
+
+  createSparkles();
+
+  // Local Storage untuk menyimpan progress
   const totalScore = localStorage.getItem('totalScore') || 0;
   const completedLessons = localStorage.getItem('completedLessons') || 0;
   
