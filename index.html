@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duodaniel - Bagus Pokoknya</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 20s infinite;
+    }
+
+    .circle:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .circle:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      top: 70%;
+      left: 80%;
+      animation-delay: 4s;
+    }
+
+    .circle:nth-child(3) {
+      width: 60px;
+      height: 60px;
+      top: 40%;
+      left: 70%;
+      animation-delay: 2s;
+    }
+
+    .circle:nth-child(4) {
+      width: 100px;
+      height: 100px;
+      top: 80%;
+      left: 20%;
+      animation-delay: 6s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(-30px) rotate(180deg);
+        opacity: 0.6;
+      }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 520px;
+      border-radius: 30px;
+      padding: 45px 40px;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+      animation: slideUp 0.6s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    h1 {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    p {
+      color: #888;
+      margin-bottom: 35px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Stats Section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      border-radius: 15px;
+      padding: 15px 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #666;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    /* Level Cards */
+    .levels {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .level-card {
+      text-decoration: none;
+      display: block;
+    }
+
+    .level {
+      width: 100%;
+      padding: 20px;
+      border-radius: 18px;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .level::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.5s ease;
+    }
+
+    .level:hover::before {
+      left: 100%;
+    }
+
+    .level:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .level-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .level-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .level-icon {
+      font-size: 1.8rem;
+    }
+
+    .level-meta {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    .level-1 {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .level-2 {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
+    .level-3 {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .level-4 {
+      background: linear-gradient(135deg, #6c4a8a, #09b26b);
+    }
+
+    .level-5 {
+      background: linear-gradient(135deg, #3b0547, #801c00);
+    }
+
+    /* Features Section */
+    .features {
+      background: #f8f9fa;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .features-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .feature-icon {
+      font-size: 1.2rem;
+    }
+
+    /* Progress Section */
+    .progress-section {
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .progress-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #7A1E2C;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar-container {
+      background: rgba(255, 255, 255, 0.6);
+      height: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 10px;
+      width: 0%;
+      animation: fillProgress 2s ease forwards;
+    }
+
+    @keyframes fillProgress {
+      to {
+        width: 35%;
+      }
+    }
+
+    .progress-text {
+      font-size: 0.8rem;
+      color: #7A1E2C;
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 2px solid #f0f0f0;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .footer-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 25px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .stat-number {
+        font-size: 1.4rem;
+      }
+
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+
+      .level {
+        padding: 18px;
+        font-size: 1rem;
+      }
+
+      .level-icon {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-animation">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+</div>
+
+<div class="container">
+  <div class="logo">📚</div>
+  <h1>Duodaniel</h1>
+  <p class="subtitle">Belajar Bahasa Inggris dengan Mudah</p>
+  <p>Tingkatkan kemampuan bahasa Inggrismu dari nol hingga mahir!<br>Pilih level sesuai kemampuanmu.</p>
+
+  <!-- Stats Section -->
+  <div class="stats">
+    <div class="stat-box">
+      <div class="stat-number">60</div>
+      <div class="stat-label">Soal</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Level</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Skor</div>
+    </div>
+  </div>
+
+  <!-- Progress Section -->
+  <div class="progress-section">
+    <div class="progress-title">🎯 Progress Belajar</div>
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill"></div>
+    </div>
+    <div class="progress-text">0 dari 20 soal terselesaikan (0%)</div>
+  </div>
+
+  <!-- Level Selection -->
+  <div class="levels">
+    <a href="lesson.html?level=1" class="level-card">
+      <button class="level level-1">
+        <div class="level-info">
+          <div class="level-title">
+            <span class="level-icon">🌱</span>
+            <span>Level 1 - Basic</span>
+          </div>
+          <div class="level-meta">20 Soal</div>
+        </div>
+      </button>
+    </a>
+
+    <a href="lesson.html?level=2" class="level-card">
+      <button class="level level-2">
+        <div class="level-info">
+          <div class="level-title">
+            <span class="level-icon">🔥</span>
+            <span>Level 2 - Intermediate</span>
+          </div>
+          <div class="level-meta">20 Soal</div>
+        </div>
+      </button>
+    </a>
+
+    <a href="lesson.html?level=3" class="level-card">
+      <button class="level level-3">
+        <div class="level-info">
+          <div class="level-title">
+            <span class="level-icon">⚡</span>
+            <span>Level 3 - Advanced</span>
+          </div>
+          <div class="level-meta">20 Soal</div>
+        </div>
+      </button>
+    </a>
+
+    <a href="lesson.html?level=4" class="level-card">
+      <button class="level level-4">
+        <div class="level-info">
+          <div class="level-title">
+            <span class="level-icon">☠️</span>
+            <span>Level 4 - EZ inimah</span>
+          </div>
+          <div class="level-meta">20 Soal</div>
+        </div>
+      </button>
+    </a>
+
+    <a href="lesson.html?level=5" class="level-card">
+      <button class="level level-5">
+        <div class="level-info">
+          <div class="level-title">
+            <span class="level-icon">🥱</span>
+            <span>Level 5 - Anak TK ini</span>
+          </div>
+          <div class="level-meta">20 Soal</div>
+        </div>
+      </button>
+    </a>
+  </div>
+
+  <!-- Fitur unggulan -->
+  <div class="features">
+    <div class="features-title">✨ Fitur Unggulan</div>
+    <div class="feature-list">
+      <div class="feature-item">
+        <span class="feature-icon">✅</span>
+        <span>100 Soal Pilihan Ganda</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">⏱️</span>
+        <span>Tracking Waktu</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📊</span>
+        <span>Statistik Lengkap</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🏆</span>
+        <span>Sistem Predikat</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💯</span>
+        <span>Sistem Scoring</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🎨</span>
+        <span>Desain Modern</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-text">
+      Belajar tanpa batas, kapan saja dimana saja
+      Soalnya duitlu kaga cukup buat langganan Duolingo Plus 😅
+    </div>
+    <div class="footer-badge">100% Gratis</div>
+  </footer>
+</div>
+
+<script>
+  // Local Storage untuk menyimpan progress (opsional untuk pengembangan selanjutnya)
+  const totalScore = localStorage.getItem('totalScore') || 0;
+  const completedLessons = localStorage.getItem('completedLessons') || 0;
+  
+  // Update stats jika ada data tersimpan
+  if (totalScore > 0) {
+    document.querySelector('.stat-box:nth-child(3) .stat-number').textContent = totalScore;
+  }
+</script>
+
+</body>
+</html>
