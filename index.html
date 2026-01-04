@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,28 +14,56 @@
       padding: 0;
     }
 
+    :root {
+      --bg-gradient-1: #1e3c72;
+      --bg-gradient-2: #2a5298;
+      --bg-gradient-3: #7a1e2c;
+      --bg-gradient-4: #c0392b;
+      --sidebar-bg: rgba(255, 255, 255, 0.98);
+      --content-bg: rgba(255, 255, 255, 0.98);
+      --text-primary: #333;
+      --text-secondary: #777;
+      --card-bg: #f8f9fa;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-mode {
+      --bg-gradient-1: #0a1628;
+      --bg-gradient-2: #1a2642;
+      --bg-gradient-3: #4a0e18;
+      --bg-gradient-4: #6a1e15;
+      --sidebar-bg: rgba(20, 25, 35, 0.98);
+      --content-bg: rgba(25, 30, 40, 0.98);
+      --text-primary: #e0e0e0;
+      --text-secondary: #aaa;
+      --card-bg: #1e2530;
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #7a1e2c 75%, #c0392b 100%);
+      background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 25%, var(--bg-gradient-3) 75%, var(--bg-gradient-4) 100%);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
       display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
       overflow-x: hidden;
+      transition: background 0.5s ease;
     }
 
     @keyframes gradientShift {
-      0%, 100% {
+
+      0%,
+      100% {
         background-position: 0% 50%;
       }
+
       50% {
         background-position: 100% 50%;
       }
     }
 
-    /* Animated Background Particles */
+    /* Animated Background */
     .bg-animation {
       position: fixed;
       top: 0;
@@ -56,7 +85,6 @@
       height: 100px;
       top: 15%;
       left: 15%;
-      animation-delay: 0s;
       background: radial-gradient(circle, rgba(30, 60, 114, 0.3), transparent);
     }
 
@@ -79,58 +107,321 @@
     }
 
     @keyframes float {
-      0%, 100% {
-        transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+
+      0%,
+      100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
         opacity: 0.4;
       }
+
       50% {
-        transform: translateY(-40px) translateX(40px) rotate(180deg) scale(1.1);
+        transform: translateY(-40px) translateX(40px) rotate(180deg);
         opacity: 0.6;
       }
     }
 
-    .sparkle {
+    /* Backdrop Overlay */
+    .sidebar-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .sidebar-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 280px;
+      height: 100vh;
+      background: var(--sidebar-bg);
+      backdrop-filter: blur(20px);
+      box-shadow: 4px 0 30px var(--shadow);
+      z-index: 1000;
+      padding: 30px 20px;
+      overflow-y: auto;
+      transition: all 0.4s ease;
+      transform: translateX(-280px);
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+      border-radius: 10px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .sidebar-header {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-logo-icon {
+      font-size: 2rem;
+    }
+
+    .sidebar-logo-text {
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sidebar-close {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+    }
+
+    /* Clock Widget */
+    .clock-widget {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-time {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 8px;
+    }
+
+    .clock-date {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+    }
+
+    .clock-day {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 5px;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .theme-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 26px;
+      background: #ccc;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .toggle-switch.active {
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+    }
+
+    .toggle-slider {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
       background: white;
       border-radius: 50%;
-      animation: sparkle 3s infinite;
-      pointer-events: none;
+      transition: 0.3s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    @keyframes sparkle {
-      0%, 100% {
-        opacity: 0;
-        transform: scale(0);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .toggle-switch.active .toggle-slider {
+      transform: translateX(24px);
     }
 
-    /* DESKTOP LAYOUT - Full Screen Split */
+    /* Sidebar Menu */
+    .sidebar-menu {
+      margin-bottom: 25px;
+    }
+
+    .menu-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .menu-item:hover {
+      background: linear-gradient(135deg, rgba(30, 60, 114, 0.1), rgba(122, 30, 44, 0.1));
+      transform: translateX(5px);
+    }
+
+    .menu-item.active {
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+      color: white;
+    }
+
+    .menu-icon {
+      font-size: 1.3rem;
+    }
+
+    /* User Stats in Sidebar */
+    .sidebar-stats {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dark-mode .sidebar-stat-item {
+      border-bottom-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-stat-item:last-child {
+      border-bottom: none;
+    }
+
+    .sidebar-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .sidebar-stat-value {
+      font-size: 1.1rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: var(--content-bg);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 20px var(--shadow);
+      transition: all 0.4s ease;
+      color: var(--text-primary);
+    }
+
+    .hamburger.sidebar-active {
+      left: 300px;
+    }
+
+    .hamburger span {
+      font-size: 1.5rem;
+    }
+
+    .hamburger:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px var(--shadow);
+    }
+
+    /* Main Container */
     .container {
-      background: transparent;
       width: 100%;
+      margin-left: 0;
       height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
       position: relative;
       z-index: 1;
-      padding: 0;
+      transition: none;
     }
 
-    /* Left Side - Hero Section */
+    /* Hero Section */
     .hero-section {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 60px;
-      position: relative;
       animation: slideInLeft 0.8s ease;
     }
 
@@ -139,6 +430,7 @@
         opacity: 0;
         transform: translateX(-50px);
       }
+
       to {
         opacity: 1;
         transform: translateX(0);
@@ -153,9 +445,12 @@
     }
 
     @keyframes bounce {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateY(0);
       }
+
       50% {
         transform: translateY(-20px);
       }
@@ -167,7 +462,6 @@
       color: white;
       margin-bottom: 20px;
       text-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
-      animation: fadeIn 1s ease;
     }
 
     .subtitle {
@@ -194,7 +488,6 @@
       gap: 20px;
       width: 100%;
       max-width: 500px;
-      margin-bottom: 40px;
     }
 
     .stat-box {
@@ -207,15 +500,24 @@
       animation: popIn 0.6s ease backwards;
     }
 
-    .stat-box:nth-child(1) { animation-delay: 0.2s; }
-    .stat-box:nth-child(2) { animation-delay: 0.3s; }
-    .stat-box:nth-child(3) { animation-delay: 0.4s; }
+    .stat-box:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .stat-box:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .stat-box:nth-child(3) {
+      animation-delay: 0.4s;
+    }
 
     @keyframes popIn {
       from {
         opacity: 0;
         transform: scale(0.5);
       }
+
       to {
         opacity: 1;
         transform: scale(1);
@@ -244,13 +546,13 @@
       letter-spacing: 1px;
     }
 
-    /* Right Side - Content Section */
+    /* Content Section */
     .content-section {
-      background: rgba(255, 255, 255, 0.98);
+      background: var(--content-bg);
       backdrop-filter: blur(20px);
       padding: 60px;
       overflow-y: auto;
-      box-shadow: -30px 0 60px rgba(0, 0, 0, 0.3);
+      box-shadow: -30px 0 60px var(--shadow);
       animation: slideInRight 0.8s ease;
     }
 
@@ -259,6 +561,7 @@
         opacity: 0;
         transform: translateX(50px);
       }
+
       to {
         opacity: 1;
         transform: translateX(0);
@@ -267,10 +570,6 @@
 
     .content-section::-webkit-scrollbar {
       width: 8px;
-    }
-
-    .content-section::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.05);
     }
 
     .content-section::-webkit-scrollbar-thumb {
@@ -284,20 +583,7 @@
       background: linear-gradient(135deg, #1e3c72, #7a1e2c);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
       margin-bottom: 30px;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* Progress Section */
@@ -311,27 +597,12 @@
       box-shadow: 0 12px 35px rgba(122, 30, 44, 0.3);
     }
 
-    .progress-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
-      animation: float 12s infinite ease-in-out;
-    }
-
     .progress-title {
       font-size: 1.2rem;
       font-weight: 800;
       color: white;
       margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
     }
 
     .progress-bar-container {
@@ -340,7 +611,6 @@
       border-radius: 20px;
       overflow: hidden;
       margin-bottom: 14px;
-      position: relative;
       box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.3);
       border: 2px solid rgba(255, 255, 255, 0.2);
     }
@@ -374,9 +644,12 @@
     }
 
     @keyframes shimmerProgress {
-      0%, 100% {
+
+      0%,
+      100% {
         background-position: 0% 50%;
       }
+
       50% {
         background-position: 100% 50%;
       }
@@ -387,9 +660,7 @@
       color: white;
       font-weight: 700;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     .progress-number {
@@ -397,11 +668,9 @@
       padding: 6px 16px;
       border-radius: 25px;
       font-weight: 900;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    /* Level Cards */
+    /* Levels */
     .levels {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -415,18 +684,36 @@
       animation: slideInLevel 0.6s ease backwards;
     }
 
-    .level-card:nth-child(1) { animation-delay: 0.1s; }
-    .level-card:nth-child(2) { animation-delay: 0.2s; }
-    .level-card:nth-child(3) { animation-delay: 0.3s; }
-    .level-card:nth-child(4) { animation-delay: 0.4s; }
-    .level-card:nth-child(5) { animation-delay: 0.5s; }
-    .level-card:nth-child(6) { animation-delay: 0.6s; }
+    .level-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .level-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .level-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .level-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .level-card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .level-card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
 
     @keyframes slideInLevel {
       from {
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -441,7 +728,7 @@
       font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.4s ease;
       color: #fff;
       position: relative;
       overflow: hidden;
@@ -474,8 +761,6 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      position: relative;
-      z-index: 1;
     }
 
     .level-icon {
@@ -492,20 +777,35 @@
       background: rgba(255, 255, 255, 0.2);
       padding: 4px 12px;
       border-radius: 15px;
-      backdrop-filter: blur(5px);
     }
 
-    /* Level Colors */
-    .level-1 { background: linear-gradient(135deg, #1e3c72, #2a5298); }
-    .level-2 { background: linear-gradient(135deg, #7a1e2c, #c0392b); }
-    .level-3 { background: linear-gradient(135deg, #1e3c72, #7a1e2c); }
-    .level-4 { background: linear-gradient(135deg, #2a5298, #c0392b); }
-    .level-5 { background: linear-gradient(135deg, #0f1c36, #7a1e2c); }
-    .level-6 { background: linear-gradient(135deg, #c0392b, #1e3c72); }
+    .level-1 {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+    }
+
+    .level-2 {
+      background: linear-gradient(135deg, #7a1e2c, #c0392b);
+    }
+
+    .level-3 {
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+    }
+
+    .level-4 {
+      background: linear-gradient(135deg, #2a5298, #c0392b);
+    }
+
+    .level-5 {
+      background: linear-gradient(135deg, #0f1c36, #7a1e2c);
+    }
+
+    .level-6 {
+      background: linear-gradient(135deg, #04f3a3, #01f7ff);
+    }
 
     /* Features */
     .features {
-      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      background: var(--card-bg);
       border-radius: 20px;
       padding: 25px;
       margin-bottom: 30px;
@@ -520,7 +820,6 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 20px;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
     .feature-list {
@@ -534,7 +833,7 @@
       align-items: center;
       gap: 10px;
       font-size: 0.9rem;
-      color: #555;
+      color: var(--text-primary);
       padding: 10px;
       border-radius: 12px;
       transition: all 0.3s ease;
@@ -555,9 +854,13 @@
       text-align: center;
     }
 
+    .dark-mode footer {
+      border-top-color: rgba(255, 255, 255, 0.05);
+    }
+
     .footer-text {
       font-size: 0.85rem;
-      color: #777;
+      color: var(--text-secondary);
       margin-bottom: 15px;
       line-height: 1.6;
     }
@@ -575,32 +878,33 @@
       box-shadow: 0 5px 15px rgba(122, 30, 44, 0.3);
     }
 
-    /* MOBILE LAYOUT */
+    /* MOBILE */
     @media (max-width: 1024px) {
-      body {
-        animation: none;
-        background: linear-gradient(135deg, #1e3c72 0%, #7a1e2c 100%);
-        padding: 0;
+      .sidebar {
+        transform: translateX(-280px);
       }
 
-      .circle {
-        animation: none;
-        opacity: 0.2;
+      .sidebar.active {
+        transform: translateX(0);
       }
 
-      .sparkle {
-        display: none;
+      .sidebar-close {
+        display: block;
+      }
+
+      .hamburger {
+        left: 20px !important;
       }
 
       .container {
+        width: 100%;
+        margin-left: 0;
         grid-template-columns: 1fr;
         height: auto;
-        min-height: 100vh;
       }
 
       .hero-section {
-        padding: 40px 25px;
-        min-height: auto;
+        padding: 80px 25px 40px;
       }
 
       .logo {
@@ -618,14 +922,10 @@
 
       .description {
         font-size: 0.95rem;
-        margin-bottom: 30px;
       }
 
       .stats {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
         max-width: 100%;
-        margin-bottom: 0;
       }
 
       .stat-box {
@@ -637,60 +937,23 @@
         font-size: 1.8rem;
       }
 
-      .stat-label {
-        font-size: 0.7rem;
-      }
-
       .content-section {
         padding: 35px 25px;
         box-shadow: none;
-        animation: none;
         border-radius: 30px 30px 0 0;
         margin-top: -20px;
       }
 
       .section-title {
         font-size: 1.5rem;
-        margin-bottom: 20px;
-      }
-
-      .progress-section {
-        padding: 22px;
-        margin-bottom: 25px;
-      }
-
-      .progress-section::before {
-        animation: none;
-      }
-
-      .progress-title {
-        font-size: 1rem;
-      }
-
-      .progress-bar-container {
-        height: 20px;
-      }
-
-      .progress-text {
-        font-size: 0.85rem;
       }
 
       .levels {
         grid-template-columns: 1fr;
-        gap: 15px;
-        margin-bottom: 25px;
       }
 
       .level-card {
         animation: none;
-      }
-
-      .level {
-        padding: 20px;
-      }
-
-      .level::before {
-        display: none;
       }
 
       .level-info {
@@ -704,244 +967,338 @@
         gap: 12px;
       }
 
-      .level-icon {
-        font-size: 2rem;
-      }
-
-      .level-title {
-        font-size: 1rem;
-      }
-
-      .features {
-        padding: 20px;
-        margin-bottom: 25px;
-      }
-
       .feature-list {
         grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .feature-item {
-        font-size: 0.85rem;
-      }
-
-      footer {
-        padding-top: 20px;
-      }
-
-      .footer-text {
-        font-size: 0.8rem;
-      }
-    }
-
-    /* Accessibility */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
+
 <body>
 
-<div class="bg-animation">
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
-</div>
+  <div class="bg-animation">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
 
-<div class="container">
-  <!-- LEFT SIDE - HERO -->
-  <div class="hero-section">
-    <div class="logo">📚</div>
-    <h1>Duodaniel</h1>
-    <p class="subtitle">Belajar Bahasa Inggris dengan Mudah</p>
-    <p class="description">Tingkatkan kemampuan bahasa Inggrismu dari nol hingga mahir! Pilih level sesuai kemampuanmu.</p>
-    
-    <div class="stats">
-      <div class="stat-box">
-        <div class="stat-number">120</div>
-        <div class="stat-label">Soal</div>
+  <!-- BACKDROP OVERLAY -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <span class="sidebar-logo-icon">📚</span>
+        <span class="sidebar-logo-text">Duodaniel</span>
       </div>
-      <div class="stat-box">
-        <div class="stat-number">6</div>
-        <div class="stat-label">Level</div>
+      <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+    </div>
+
+    <!-- Clock Widget -->
+    <div class="clock-widget">
+      <div class="clock-time" id="clockTime">00:00:00</div>
+      <div class="clock-date" id="clockDate">Loading...</div>
+      <div class="clock-day" id="clockDay">Loading...</div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+      <div class="theme-label">
+        <span id="themeIcon">☀️</span>
+        <span id="themeText">Mode Terang</span>
       </div>
-      <div class="stat-box">
-        <div class="stat-number">0</div>
-        <div class="stat-label">Skor</div>
+      <div class="toggle-switch" id="themeToggle" onclick="toggleTheme()">
+        <div class="toggle-slider"></div>
       </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="sidebar-stats">
+      <div class="sidebar-stat-item">
+        <span class="sidebar-stat-label">Total Skor</span>
+        <span class="sidebar-stat-value" id="sidebarScore">0</span>
+      </div>
+      <div class="sidebar-stat-item">
+        <span class="sidebar-stat-label">Level Terbuka</span>
+        <span class="sidebar-stat-value">6/6</span>
+      </div>
+      <div class="sidebar-stat-item">
+        <span class="sidebar-stat-label">Streak Hari</span>
+        <span class="sidebar-stat-value">0</span>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="sidebar-menu">
+      <div class="menu-title">Menu Utama</div>
+      <a href="index.html" class="menu-item active">
+        <span class="menu-icon">🏠</span>
+        <span>Beranda</span>
+      </a>
+      <a href="statistik.html" class="menu-item">
+        <span class="menu-icon">📊</span>
+        <span>Statistik</span>
+      </a>
+      <a href="pencapaian.html" class="menu-item">
+        <span class="menu-icon">🏆</span>
+        <span>Pencapaian</span>
+      </a>
+      <a href="pengaturan.html" class="menu-item">
+        <span class="menu-icon">⚙️</span>
+        <span>Pengaturan</span>
+      </a>
+    </div>
+
+    <div class="sidebar-menu">
+      <div class="menu-title">Bantuan</div>
+      <a href="panduan.html" class="menu-item">
+        <span class="menu-icon">📖</span>
+        <span>Panduan</span>
+      </a>
+      <a href="feedback.html" class="menu-item">
+        <span class="menu-icon">💬</span>
+        <span>Feedback</span>
+      </a>
     </div>
   </div>
 
-  <!-- RIGHT SIDE - CONTENT -->
-  <div class="content-section">
-    <h2 class="section-title">🎯 Mulai Belajar</h2>
-
-    <!-- Progress Section -->
-    <div class="progress-section">
-      <div class="progress-title">
-        <span>Progress Belajar</span>
-      </div>
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill"></div>
-      </div>
-      <div class="progress-text">
-        <span>7 dari 20 soal terselesaikan</span>
-        <span class="progress-number">35%</span>
-      </div>
-    </div>
-
-    <!-- Level Selection -->
-    <div class="levels">
-      <a href="lesson.html?level=1" class="level-card">
-        <button class="level level-1">
-          <div class="level-info">
-            <div class="level-title-wrapper">
-              <span class="level-icon">🌱</span>
-              <span class="level-title">Level 1 - Basic</span>
-            </div>
-            <div class="level-meta">20 Soal</div>
-          </div>
-        </button>
-      </a>
-
-      <a href="lesson.html?level=2" class="level-card">
-        <button class="level level-2">
-          <div class="level-info">
-            <div class="level-title-wrapper">
-              <span class="level-icon">🔥</span>
-              <span class="level-title">Level 2 - Intermediate</span>
-            </div>
-            <div class="level-meta">20 Soal</div>
-          </div>
-        </button>
-      </a>
-
-      <a href="lesson.html?level=3" class="level-card">
-        <button class="level level-3">
-          <div class="level-info">
-            <div class="level-title-wrapper">
-              <span class="level-icon">⚡</span>
-              <span class="level-title">Level 3 - Advanced</span>
-            </div>
-            <div class="level-meta">20 Soal</div>
-          </div>
-        </button>
-      </a>
-
-      <a href="lesson.html?level=4" class="level-card">
-        <button class="level level-4">
-          <div class="level-info">
-            <div class="level-title-wrapper">
-              <span class="level-icon">☠️</span>
-              <span class="level-title">Level 4 - EZ inimah</span>
-            </div>
-            <div class="level-meta">20 Soal</div>
-          </div>
-        </button>
-      </a>
-
-      <a href="lesson.html?level=5" class="level-card">
-        <button class="level level-5">
-          <div class="level-info">
-            <div class="level-title-wrapper">
-              <span class="level-icon">🥱</span>
-              <span class="level-title">Level 5 - Anak TK ini</span>
-            </div>
-            <div class="level-meta">20 Soal</div>
-          </div>
-        </button>
-      </a>
-
-      <a href="lesson.html?level=6" class="level-card">
-        <button class="level level-6">
-          <div class="level-info">
-            <div class="level-title-wrapper">
-              <span class="level-icon">😈</span>
-              <span class="level-title">Level 6 - Fufufafa</span>
-            </div>
-            <div class="level-meta">20 Soal</div>
-          </div>
-        </button>
-      </a>
-    </div>
-
-    <!-- Features -->
-    <div class="features">
-      <div class="features-title">✨ Fitur Unggulan</div>
-      <div class="feature-list">
-        <div class="feature-item">
-          <span class="feature-icon">✅</span>
-          <span>120 Soal Pilihan Ganda</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">⏱️</span>
-          <span>Tracking Waktu</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">📊</span>
-          <span>Statistik Lengkap</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">🏆</span>
-          <span>Sistem Predikat</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">💯</span>
-          <span>Sistem Scoring</span>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">🎨</span>
-          <span>Desain Modern</span>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      <div class="footer-text">
-        Belajar tanpa batas, kapan saja dimana saja<br>
-        Soalnya duitlu kaga cukup buat langganan Duolingo Plus 😅
-      </div>
-      <div class="footer-badge">100% Gratis</div>
-    </footer>
+  <!-- HAMBURGER -->
+  <div class="hamburger" id="hamburger" onclick="toggleSidebar()">
+    <span>☰</span>
   </div>
-</div>
 
-<script>
-  // Detect device
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 1024;
-  const isLowEndDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+  <!-- MAIN CONTAINER -->
+  <div class="container" id="container">
+    <!-- HERO -->
+    <div class="hero-section">
+      <div class="logo">📚</div>
+      <h1>Duodaniel</h1>
+      <p class="subtitle">Belajar Bahasa Inggris dengan Mudah</p>
+      <p class="description">Tingkatkan kemampuan bahasa Inggrismu dari nol hingga mahir! Pilih level sesuai
+        kemampuanmu.</p>
 
-  // Create sparkles only on desktop
-  function createSparkles() {
-    if (!isMobile && !isLowEndDevice) {
-      const container = document.querySelector('.bg-animation');
-      for (let i = 0; i < 15; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * 100 + '%';
-        sparkle.style.top = Math.random() * 100 + '%';
-        sparkle.style.animationDelay = Math.random() * 3 + 's';
-        container.appendChild(sparkle);
+      <div class="stats">
+        <div class="stat-box">
+          <div class="stat-number">120</div>
+          <div class="stat-label">Soal</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Level</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" id="mainScore">0</div>
+          <div class="stat-label">Skor</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content-section">
+      <h2 class="section-title">🎯 Mulai Belajar</h2>
+
+      <div class="progress-section">
+        <div class="progress-title">Progress Belajar</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-text">
+          <span>7 dari 20 soal terselesaikan</span>
+          <span class="progress-number">35%</span>
+        </div>
+      </div>
+
+      <div class="levels">
+        <a href="lesson.html?level=1" class="level-card">
+          <button class="level level-1">
+            <div class="level-info">
+              <div class="level-title-wrapper">
+                <span class="level-icon">🌱</span>
+                <span class="level-title">Level 1 - Basic</span>
+              </div>
+              <div class="level-meta">20 Soal</div>
+            </div>
+          </button>
+        </a>
+
+        <a href="lesson.html?level=2" class="level-card">
+          <button class="level level-2">
+            <div class="level-info">
+              <div class="level-title-wrapper">
+                <span class="level-icon">🔥</span>
+                <span class="level-title">Level 2 - Intermediate</span>
+              </div>
+              <div class="level-meta">20 Soal</div>
+            </div>
+          </button>
+        </a>
+
+        <a href="lesson.html?level=3" class="level-card">
+          <button class="level level-3">
+            <div class="level-info">
+              <div class="level-title-wrapper">
+                <span class="level-icon">⚡</span>
+                <span class="level-title">Level 3 - Advanced</span>
+              </div>
+              <div class="level-meta">20 Soal</div>
+            </div>
+          </button>
+        </a>
+
+        <a href="lesson.html?level=4" class="level-card">
+          <button class="level level-4">
+            <div class="level-info">
+              <div class="level-title-wrapper">
+                <span class="level-icon">☠️</span>
+                <span class="level-title">Level 4 - EZ inimah</span>
+              </div>
+              <div class="level-meta">20 Soal</div>
+            </div>
+          </button>
+        </a>
+
+        <a href="lesson.html?level=5" class="level-card">
+          <button class="level level-5">
+            <div class="level-info">
+              <div class="level-title-wrapper">
+                <span class="level-icon">🥱</span>
+                <span class="level-title">Level 5 - Anak TK ini</span>
+              </div>
+              <div class="level-meta">20 Soal</div>
+            </div>
+          </button>
+        </a>
+
+        <a href="lesson.html?level=6" class="level-card">
+          <button class="level level-6">
+            <div class="level-info">
+              <div class="level-title-wrapper">
+                <span class="level-icon">😈</span>
+                <span class="level-title">Level 6 - Fufufafa</span>
+              </div>
+              <div class="level-meta">20 Soal</div>
+            </div>
+          </button>
+        </a>
+      </div>
+
+      <div class="features">
+        <div class="features-title">✨ Fitur Unggulan</div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="feature-icon">✅</span>
+            <span>120 Soal Pilihan Ganda</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">⏱️</span>
+            <span>Tracking Waktu</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📊</span>
+            <span>Statistik Lengkap</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🏆</span>
+            <span>Sistem Predikat</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">💯</span>
+            <span>Sistem Scoring</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎨</span>
+            <span>Desain Modern</span>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="footer-text">
+          Belajar tanpa batas, kapan saja dimana saja<br>
+          Soalnya duitlu kaga cukup buat langganan Duolingo Plus 😅
+        </div>
+        <div class="footer-badge">100% Gratis</div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Clock Function
+    function updateClock() {
+      const now = new Date();
+
+      // Time
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clockTime').textContent = `${hours}:${minutes}:${seconds}`;
+
+      // Date
+      const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+      const dayName = days[now.getDay()];
+      const date = now.getDate();
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
+
+      document.getElementById('clockDate').textContent = `${date} ${month} ${year}`;
+      document.getElementById('clockDay').textContent = dayName;
+    }
+
+    // Update clock every second
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Theme Toggle
+    function toggleTheme() {
+      const body = document.body;
+      const toggle = document.getElementById('themeToggle');
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+
+      body.classList.toggle('dark-mode');
+      toggle.classList.toggle('active');
+
+      if (body.classList.contains('dark-mode')) {
+        icon.textContent = '🌙';
+        text.textContent = 'Mode Gelap';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        icon.textContent = '☀️';
+        text.textContent = 'Mode Terang';
+        localStorage.setItem('theme', 'light');
       }
     }
-  }
 
-  createSparkles();
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      toggleTheme();
+    }
 
-  // Local Storage
-  const totalScore = localStorage.getItem('totalScore') || 0;
-  
-  if (totalScore > 0) {
-    document.querySelector('.stat-box:nth-child(3) .stat-number').textContent = totalScore;
-  }
-</script>
+    // Sidebar Toggle
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const hamburger = document.getElementById('hamburger');
+      const backdrop = document.getElementById('sidebarBackdrop');
+
+      sidebar.classList.toggle('active');
+      hamburger.classList.toggle('sidebar-active');
+      backdrop.classList.toggle('active');
+    }
+
+    // Close sidebar when clicking outside is now handled by backdrop click
+
+    // Load score from localStorage
+    const totalScore = localStorage.getItem('totalScore') || 0;
+    if (totalScore > 0) {
+      document.getElementById('mainScore').textContent = totalScore;
+      document.getElementById('sidebarScore').textContent = totalScore;
+    }
+  </script>
 
 </body>
+
 </html>
