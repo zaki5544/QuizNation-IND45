@@ -760,7 +760,8 @@
             2: '🔥',
             3: '⚡',
             4: '☠️',
-            5: '🥱'
+            5: '🥱',
+            6: '🚀'
         };
 
         const questionBank = {
@@ -879,6 +880,30 @@
                 { question: "President Prabowo underscores the imperative of cultivating nationalist sentiment while embracing globalization. This nuanced stance seeks to reconcile national identity with international integration. What does 'reconcile' mean?", options: ["Menolak salah satu konsep sepenuhnya", "Menyelaraskan atau memadukan perbedaan yang tampak berlawanan", "Mengabaikan kedua konsep tersebut", "Mempertajam konflik antara dua konsep"], answer: 1 },
                 { question: "The Golden Indonesia 2045 agenda stipulates that educational curriculum must inculcate critical thinking and entrepreneurial skills. What does 'inculcate' most precisely mean?", options: ["Menolak sebagai tidak relevan", "Mengabaikan dalam proses pembelajaran", "Menanamkan atau membiasakan melalui pengulangan dan instruksi", "Menghapus atau menghilangkan dari sistem"], answer: 2 },
                 { question: "Prabowo's social welfare programs aim to obviate extreme poverty through targeted interventions and capacity building. What does 'obviate' signify in this policy context?", options: ["Menunda penanganan tanpa solusi", "Mencegah atau menghilangkan dengan tindakan preventif", "Mengabaikan masalah yang ada", "Memperparah atau meningkatkan masalah"], answer: 1 }
+            ],
+
+
+            6: [
+                { question: "In academic research, what is the primary limitation of relying solely on correlational data?", options: ["It cannot identify statistical relationships", "It fails to establish causal inference", "It invalidates quantitative analysis", "It eliminates theoretical interpretation"], answer: 1 },
+                { question: "The phrase 'policy implementation gap' most accurately refers to…", options: ["Differences between policy formulation and real-world outcomes", "The absence of legal frameworks", "Conflicts between government agencies", "Budget overruns in public projects"], answer: 0 },
+                { question: "In critical theory, 'power is discursively produced' implies that power…", options: ["Exists only through formal institutions", "Is constructed and maintained through language and narratives", "Is irrelevant to social relations", "Operates independently of ideology"], answer: 1 },
+                { question: "What is the strongest methodological justification for using longitudinal studies?", options: ["They reduce sampling bias entirely", "They allow observation of change over time", "They require fewer respondents", "They eliminate confounding variables"], answer: 1 },
+                { question: "In policy analysis, unintended consequences most commonly arise from…", options: ["Poor data visualization", "Overreliance on qualitative methods", "Complex interactions within social systems", "Excessive stakeholder participation"], answer: 2 },
+                { question: "The term 'epistemic authority' refers to…", options: ["Legal power to enforce knowledge", "Recognized credibility to define what counts as knowledge", "Control over data collection instruments", "Institutional ownership of research outputs"], answer: 1 },
+                { question: "A key critique of technocratic governance is that it tends to…", options: ["Ignore empirical evidence", "Overemphasize expertise at the expense of democratic input", "Reject technological innovation", "Prioritize local knowledge over data"], answer: 1 },
+                { question: "In systems thinking, leverage points are best described as…", options: ["Areas where systems are most resistant to change", "Minor interventions with disproportionate impact", "Fixed components of a system", "Random variables influencing outcomes"], answer: 1 },
+                { question: "What distinguishes normative analysis from positive analysis?", options: ["Normative focuses on what ought to be, positive on what is", "Normative relies on data, positive on values", "Normative avoids theory, positive embraces it", "Normative is objective, positive is subjective"], answer: 0 },
+                { question: "The concept of 'path dependency' suggests that…", options: ["Current decisions are independent of historical context", "Early choices constrain future options", "Systems naturally evolve toward optimal outcomes", "Institutional change occurs randomly"], answer: 1 },
+                { question: "In qualitative research, saturation is reached when…", options: ["Sample size exceeds statistical thresholds", "No new meaningful insights emerge from additional data", "All hypotheses are confirmed", "Coding frameworks are standardized"], answer: 1 },
+                { question: "A central limitation of rational choice theory is its assumption that actors…", options: ["Always possess perfect information and rationality", "Are influenced by structural constraints", "Respond to incentives", "Operate within institutions"], answer: 0 },
+                { question: "What does 'evidence-based policy' primarily seek to minimize?", options: ["Political negotiation", "Normative judgment", "Decision-making based on intuition alone", "Stakeholder consultation"], answer: 2 },
+                { question: "In discourse analysis, framing effects influence outcomes by…", options: ["Changing legal definitions", "Shaping how issues are perceived and interpreted", "Altering statistical significance", "Restricting access to information"], answer: 1 },
+                { question: "The precautionary principle is most relevant when…", options: ["Risks are well-known and quantifiable", "Potential harms are uncertain but potentially severe", "Benefits clearly outweigh costs", "Technological adoption is inevitable"], answer: 1 },
+                { question: "What is the primary risk of policy over-centralization?", options: ["Excessive local autonomy", "Reduced responsiveness to contextual differences", "Increased innovation capacity", "Fragmentation of authority"], answer: 1 },
+                { question: "In advanced analytics, model overfitting occurs when a model…", options: ["Fails to capture underlying patterns", "Performs well on training data but poorly on new data", "Uses too few variables", "Is based on theoretical assumptions"], answer: 1 },
+                { question: "Institutional isomorphism explains why organizations tend to…", options: ["Innovate continuously", "Resist external pressure", "Become increasingly similar over time", "Prioritize efficiency above legitimacy"], answer: 2 },
+                { question: "What does the concept of 'bounded rationality' challenge?", options: ["The role of incentives in decision-making", "The assumption of fully rational actors", "The importance of institutions", "The existence of preferences"], answer: 1 },
+                { question: "In governance studies, legitimacy is most closely associated with…", options: ["Coercive enforcement capacity", "Public acceptance and perceived right to rule", "Economic performance indicators", "Administrative efficiency"], answer: 1 }
             ]
 
 
@@ -971,7 +996,7 @@
                 predicate = "Sempurna!";
                 emoji = "🌟";
                 createConfetti();
-            } else if (percentage >= 80) {
+            } else if (percentage >= 85) {
                 predicate = "Luar Biasa!";
                 emoji = "🎉";
             } else if (percentage >= 70) {
@@ -984,7 +1009,7 @@
                 predicate = "Lumayan";
                 emoji = "🙂";
             } else {
-                predicate = "Perlu Belajar Lagi";
+                predicate = "Tolol Banget!";
                 emoji = "📚";
             }
 
