@@ -704,13 +704,39 @@
       animation: wiggle 3s infinite;
     }
 
+    /* Mobile Optimization */
     @media (max-width: 600px) {
+      /* Disable heavy animations on mobile */
+      body {
+        animation: none;
+        background: linear-gradient(135deg, #1e3c72 0%, #7a1e2c 100%);
+      }
+
+      .circle {
+        animation: none;
+        opacity: 0.2;
+      }
+
+      .sparkle {
+        display: none; /* Hide sparkles on mobile */
+      }
+
       .container {
         padding: 30px 25px;
+        animation: slideUp 0.4s ease;
+      }
+
+      .logo {
+        animation: none;
+        transform: none;
       }
 
       h1 {
         font-size: 2.2rem;
+        animation: none;
+        background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
       .stats {
@@ -718,8 +744,54 @@
         gap: 10px;
       }
 
+      .stat-box {
+        animation: popIn 0.4s ease backwards;
+      }
+
+      .stat-box::before {
+        animation: none; /* Disable shine effect on mobile */
+      }
+
       .stat-number {
         font-size: 1.6rem;
+      }
+
+      .progress-section {
+        animation: none;
+      }
+
+      .progress-section::before,
+      .progress-section::after {
+        animation: none;
+      }
+
+      .progress-bar-fill::after {
+        animation: none; /* Disable sliding light effect */
+      }
+
+      .progress-number {
+        animation: none;
+      }
+
+      .level-card {
+        animation: none;
+      }
+
+      .level::before {
+        display: none; /* Remove hover effect on mobile */
+      }
+
+      .level-icon {
+        font-size: 1.6rem;
+        animation: none;
+      }
+
+      .feature-icon {
+        animation: none;
+      }
+
+      .footer-badge {
+        animation: none;
       }
 
       .feature-list {
@@ -730,9 +802,16 @@
         padding: 18px;
         font-size: 1rem;
       }
+    }
 
-      .level-icon {
-        font-size: 1.6rem;
+    /* Performance optimization for all devices */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -899,17 +978,35 @@
 </div>
 
 <script>
-  // Create sparkles
+  // Detect mobile device
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isLowEndDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+
+  // Create sparkles only on desktop
   function createSparkles() {
-    const container = document.querySelector('.bg-animation');
-    for (let i = 0; i < 20; i++) {
-      const sparkle = document.createElement('div');
-      sparkle.className = 'sparkle';
-      sparkle.style.left = Math.random() * 100 + '%';
-      sparkle.style.top = Math.random() * 100 + '%';
-      sparkle.style.animationDelay = Math.random() * 3 + 's';
-      container.appendChild(sparkle);
+    if (!isMobile && !isLowEndDevice) {
+      const container = document.querySelector('.bg-animation');
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = Math.random() * 3 + 's';
+        container.appendChild(sparkle);
+      }
     }
+  }
+
+  // Optimize for mobile
+  if (isMobile || isLowEndDevice) {
+    // Reduce number of background circles
+    const circles = document.querySelectorAll('.circle');
+    circles.forEach((circle, index) => {
+      if (index > 2) circle.remove();
+    });
+
+    // Add mobile-optimized class
+    document.body.classList.add('mobile-optimized');
   }
 
   createSparkles();
