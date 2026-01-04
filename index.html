@@ -670,11 +670,11 @@
       font-weight: 900;
     }
 
-    /* Levels */
+    /* Levels - IMPROVED COMPACT DESIGN */
     .levels {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
       margin-bottom: 35px;
     }
 
@@ -722,10 +722,10 @@
 
     .level {
       width: 100%;
-      padding: 25px 20px;
-      border-radius: 20px;
+      padding: 18px 15px;
+      border-radius: 16px;
       border: none;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.4s ease;
@@ -752,31 +752,32 @@
     }
 
     .level:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
     }
 
     .level-info {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .level-icon {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
 
     .level-title {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+      text-align: center;
     }
 
     .level-meta {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       opacity: 0.9;
       background: rgba(255, 255, 255, 0.2);
-      padding: 4px 12px;
-      border-radius: 15px;
+      padding: 3px 10px;
+      border-radius: 12px;
     }
 
     .level-1 {
@@ -799,8 +800,90 @@
       background: linear-gradient(135deg, #0f1c36, #7a1e2c);
     }
 
-    .level-6 {
-      background: linear-gradient(135deg, #04f3a3, #01f7ff);
+    .level-others {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      position: relative;
+    }
+
+    /* Dropdown for Other Levels */
+    .level-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--content-bg);
+      border-radius: 12px;
+      margin-top: 8px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px var(--shadow);
+      z-index: 100;
+      display: none;
+      animation: dropdownSlide 0.3s ease;
+    }
+
+    @keyframes dropdownSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .level-dropdown.show {
+      display: block;
+    }
+
+    .level-dropdown::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .level-dropdown::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 10px;
+    }
+
+    .dropdown-item {
+      padding: 12px 15px;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dark-mode .dropdown-item {
+      border-bottom-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      padding-left: 20px;
+    }
+
+    .dropdown-item-number {
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.1rem;
+    }
+
+    .dropdown-item-meta {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: var(--card-bg);
+      padding: 4px 10px;
+      border-radius: 10px;
     }
 
     /* Features */
@@ -949,22 +1032,24 @@
       }
 
       .levels {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
       }
 
       .level-card {
         animation: none;
       }
 
-      .level-info {
-        flex-direction: row;
-        justify-content: space-between;
+      .level {
+        padding: 15px 12px;
       }
 
-      .level-title-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+      .level-icon {
+        font-size: 1.5rem;
+      }
+
+      .level-title {
+        font-size: 0.85rem;
       }
 
       .feature-list {
@@ -1021,7 +1106,7 @@
       </div>
       <div class="sidebar-stat-item">
         <span class="sidebar-stat-label">Level Terbuka</span>
-        <span class="sidebar-stat-value">6/6</span>
+        <span class="sidebar-stat-value">50/50</span>
       </div>
       <div class="sidebar-stat-item">
         <span class="sidebar-stat-label">Streak Hari</span>
@@ -1080,11 +1165,11 @@
 
       <div class="stats">
         <div class="stat-box">
-          <div class="stat-number">120</div>
+          <div class="stat-number">2000</div>
           <div class="stat-label">Soal</div>
         </div>
         <div class="stat-box">
-          <div class="stat-number">6</div>
+          <div class="stat-number">100</div>
           <div class="stat-label">Level</div>
         </div>
         <div class="stat-box">
@@ -1104,7 +1189,7 @@
           <div class="progress-bar-fill"></div>
         </div>
         <div class="progress-text">
-          <span>7 dari 20 soal terselesaikan</span>
+          <span>7 dari 20 soal terselesaikan, btw ini gimmick doang, aku gatau cara bikin bar otomatis</span>
           <span class="progress-number">35%</span>
         </div>
       </div>
@@ -1113,10 +1198,8 @@
         <a href="lesson.html?level=1" class="level-card">
           <button class="level level-1">
             <div class="level-info">
-              <div class="level-title-wrapper">
-                <span class="level-icon">🌱</span>
-                <span class="level-title">Level 1 - Basic</span>
-              </div>
+              <span class="level-icon">🌱</span>
+              <span class="level-title">Level 1</span>
               <div class="level-meta">20 Soal</div>
             </div>
           </button>
@@ -1125,10 +1208,8 @@
         <a href="lesson.html?level=2" class="level-card">
           <button class="level level-2">
             <div class="level-info">
-              <div class="level-title-wrapper">
-                <span class="level-icon">🔥</span>
-                <span class="level-title">Level 2 - Intermediate</span>
-              </div>
+              <span class="level-icon">🔥</span>
+              <span class="level-title">Level 2</span>
               <div class="level-meta">20 Soal</div>
             </div>
           </button>
@@ -1137,10 +1218,8 @@
         <a href="lesson.html?level=3" class="level-card">
           <button class="level level-3">
             <div class="level-info">
-              <div class="level-title-wrapper">
-                <span class="level-icon">⚡</span>
-                <span class="level-title">Level 3 - Advanced</span>
-              </div>
+              <span class="level-icon">⚡</span>
+              <span class="level-title">Level 3</span>
               <div class="level-meta">20 Soal</div>
             </div>
           </button>
@@ -1149,10 +1228,8 @@
         <a href="lesson.html?level=4" class="level-card">
           <button class="level level-4">
             <div class="level-info">
-              <div class="level-title-wrapper">
-                <span class="level-icon">☠️</span>
-                <span class="level-title">Level 4 - EZ inimah</span>
-              </div>
+              <span class="level-icon">☠️</span>
+              <span class="level-title">Level 4</span>
               <div class="level-meta">20 Soal</div>
             </div>
           </button>
@@ -1161,26 +1238,27 @@
         <a href="lesson.html?level=5" class="level-card">
           <button class="level level-5">
             <div class="level-info">
-              <div class="level-title-wrapper">
-                <span class="level-icon">🥱</span>
-                <span class="level-title">Level 5 - Anak TK ini</span>
-              </div>
+              <span class="level-icon">🥱</span>
+              <span class="level-title">Level 5</span>
               <div class="level-meta">20 Soal</div>
             </div>
           </button>
         </a>
 
-        <a href="lesson.html?level=6" class="level-card">
-          <button class="level level-6">
+        <!-- Others Dropdown Button -->
+        <div class="level-card" style="position: relative;">
+          <button class="level level-others" onclick="toggleDropdown(event)">
             <div class="level-info">
-              <div class="level-title-wrapper">
-                <span class="level-icon">😈</span>
-                <span class="level-title">Level 6 - Fufufafa</span>
-              </div>
-              <div class="level-meta">20 Soal</div>
+              <span class="level-icon">🌏</span>
+              <span class="level-title">Lainnya</span>
+              <div class="level-meta">Level 6-100</div>
             </div>
           </button>
-        </a>
+          
+          <div class="level-dropdown" id="levelDropdown">
+            <!-- Levels 6-100 will be generated by JavaScript -->
+          </div>
+        </div>
       </div>
 
       <div class="features">
@@ -1188,7 +1266,7 @@
         <div class="feature-list">
           <div class="feature-item">
             <span class="feature-icon">✅</span>
-            <span>120 Soal Pilihan Ganda</span>
+            <span>1000 Soal Pilihan Ganda</span>
           </div>
           <div class="feature-item">
             <span class="feature-icon">⏱️</span>
@@ -1224,6 +1302,44 @@
   </div>
 
   <script>
+    // Generate dropdown items for levels 6-100
+    function generateLevelDropdown() {
+      const dropdown = document.getElementById('levelDropdown');
+      dropdown.innerHTML = '';
+      
+      for (let i = 6; i <= 100; i++) {
+        const item = document.createElement('a');
+        item.href = `lesson.html?level=${i}`;
+        item.className = 'dropdown-item';
+        item.innerHTML = `
+          <span class="dropdown-item-number">Level ${i}</span>
+          <span class="dropdown-item-meta">20 Soal</span>
+        `;
+        dropdown.appendChild(item);
+      }
+    }
+
+    // Toggle dropdown
+    function toggleDropdown(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const dropdown = document.getElementById('levelDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('levelDropdown');
+      const othersButton = document.querySelector('.level-others');
+      
+      if (!othersButton.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+
+    // Initialize dropdown on page load
+    generateLevelDropdown();
+
     // Clock Function
     function updateClock() {
       const now = new Date();
@@ -1288,8 +1404,6 @@
       hamburger.classList.toggle('sidebar-active');
       backdrop.classList.toggle('active');
     }
-
-    // Close sidebar when clicking outside is now handled by backdrop click
 
     // Load score from localStorage
     const totalScore = localStorage.getItem('totalScore') || 0;
