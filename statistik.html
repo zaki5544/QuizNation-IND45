@@ -52,12 +52,9 @@
         }
 
         @keyframes gradientShift {
-
-            0%,
-            100% {
+            0%, 100% {
                 background-position: 0% 50%;
             }
-
             50% {
                 background-position: 100% 50%;
             }
@@ -107,13 +104,10 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0) translateX(0) rotate(0deg);
                 opacity: 0.4;
             }
-
             50% {
                 transform: translateY(-40px) translateX(40px) rotate(180deg);
                 opacity: 0.6;
@@ -423,7 +417,6 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -483,7 +476,6 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -546,39 +538,49 @@
             margin-bottom: 25px;
         }
 
-        /* Level Progress */
+        /* Level Progress - COMPACT GRID */
         .level-progress-container {
             display: grid;
-            gap: 20px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .level-progress-item {
             background: var(--card-bg);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 15px 10px;
             transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid transparent;
         }
 
         .level-progress-item:hover {
-            transform: translateX(5px);
+            transform: translateY(-3px) scale(1.05);
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .level-progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+        .level-progress-item.completed {
+            background: linear-gradient(135deg, rgba(72, 187, 120, 0.2), rgba(56, 161, 105, 0.2));
+            border-color: #48bb78;
         }
 
-        .level-progress-name {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .level-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .level-number {
+            font-size: 0.85rem;
             font-weight: 700;
             color: var(--text-primary);
+            margin-bottom: 5px;
         }
 
-        .level-progress-percentage {
+        .level-percentage {
             font-size: 1.2rem;
             font-weight: 900;
             background: linear-gradient(135deg, #1e3c72, #7a1e2c);
@@ -586,35 +588,67 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .level-progress-bar {
-            background: rgba(0, 0, 0, 0.1);
-            height: 12px;
+        .level-status {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Others Dropdown Button */
+        .others-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .others-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .others-button.active {
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* Others Dropdown Content */
+        .others-dropdown {
+            grid-column: 1 / -1;
+            display: none;
+            background: var(--card-bg);
+            border-radius: 0 0 12px 12px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .others-dropdown.show {
+            display: block;
+        }
+
+        .others-dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .others-dropdown::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 10px;
-            overflow: hidden;
-            position: relative;
         }
 
-        .dark-mode .level-progress-bar {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .level-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #1e3c72, #7a1e2c);
-            border-radius: 10px;
-            transition: width 1s ease;
-            position: relative;
-        }
-
-        .level-progress-fill::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent);
-            border-radius: 10px 10px 0 0;
+        .others-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
         }
 
         /* Activity Chart */
@@ -680,6 +714,11 @@
             .stat-card-value {
                 font-size: 2.5rem;
             }
+
+            .level-progress-container,
+            .others-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
     </style>
 </head>
@@ -731,7 +770,7 @@
             </div>
             <div class="sidebar-stat-item">
                 <span class="sidebar-stat-label">Level Terbuka</span>
-                <span class="sidebar-stat-value">6/6</span>
+                <span class="sidebar-stat-value">100/100</span>
             </div>
             <div class="sidebar-stat-item">
                 <span class="sidebar-stat-label">Streak Hari</span>
@@ -802,7 +841,7 @@
                     <div class="stat-card-title">Soal Diselesaikan</div>
                 </div>
                 <div class="stat-card-value" id="completedQuestions">0</div>
-                <div class="stat-card-label">Dari 120 total soal</div>
+                <div class="stat-card-label">Dari 2000 total soal</div>
             </div>
 
             <div class="stat-card">
@@ -828,7 +867,7 @@
         <div class="chart-container">
             <h2 class="chart-title">Progress Per Level</h2>
             <div class="level-progress-container" id="levelProgress">
-                <!-- Will be populated by JavaScript -->
+                <!-- Levels 1-5 will be populated by JavaScript -->
             </div>
         </div>
 
@@ -842,23 +881,44 @@
     </div>
 
     <script>
+        // Level emoji mapping
+        const levelEmojis = {
+            1: '🌱', 2: '🔥', 3: '⚡', 4: '☠️', 5: '🥱',
+            6: '🚀', 7: '💎', 8: '🌟', 9: '👑', 10: '🎯',
+            11: '🦁', 12: '🐉', 13: '🦅', 14: '🐺', 15: '🐯',
+            16: '🦈', 17: '🦖', 18: '🦇', 19: '🦂', 20: '🐍',
+            21: '🌋', 22: '⚔️', 23: '🛡️', 24: '🏹', 25: '🔱',
+            26: '💫', 27: '🌙', 28: '☄️', 29: '🌌', 30: '🪐',
+            31: '🎪', 32: '🎭', 33: '🎨', 34: '🎬', 35: '🎮',
+            36: '🎲', 37: '🎰', 38: '🎯', 39: '🏆', 40: '🥇',
+            41: '🔮', 42: '💰', 43: '💍', 44: '👹', 45: '👺',
+            46: '🤖', 47: '👽', 48: '🧙', 49: '🧛', 50: '🧜',
+            51: '🧚', 52: '🧞', 53: '🧝', 54: '🧟', 55: '🦸',
+            56: '🦹', 57: '🥷', 58: '💂', 59: '🕵️', 60: '👮',
+            61: '🌈', 62: '🌸', 63: '🌺', 64: '🌻', 65: '🌷',
+            66: '🌹', 67: '🥀', 68: '🌼', 69: '🌴', 70: '🌳',
+            71: '🍀', 72: '🍁', 73: '🍂', 74: '🍃', 75: '🎋',
+            76: '🎄', 77: '🌲', 78: '🌿', 79: '☘️', 80: '🪴',
+            81: '🎁', 82: '🎀', 83: '🎊', 84: '🎉', 85: '🎈',
+            86: '🎆', 87: '🎇', 88: '🧨', 89: '✨', 90: '🎃',
+            91: '🎄', 92: '🎋', 93: '🎍', 94: '🎎', 95: '🎏',
+            96: '🎐', 97: '🎑', 98: '🧧', 99: '🎗️', 100: '🏅'
+        };
+
         // Load statistics data
         function loadStatistics() {
-            // Get data from localStorage
             const totalScore = parseInt(localStorage.getItem('totalScore')) || 0;
             const completedLessons = parseInt(localStorage.getItem('completedLessons')) || 0;
 
-            // Update main stats
             document.getElementById('totalScore').textContent = totalScore;
             document.getElementById('sidebarScore').textContent = totalScore;
             document.getElementById('completedQuestions').textContent = completedLessons;
 
-            // Calculate total time
             let totalTime = 0;
             let totalPercentage = 0;
             let completedLevels = 0;
 
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 100; i++) {
                 const time = parseInt(localStorage.getItem(`level_${i}_time`)) || 0;
                 totalTime += time;
 
@@ -869,62 +929,89 @@
                 }
             }
 
-            // Display total time in minutes
             document.getElementById('totalTime').textContent = Math.floor(totalTime / 60);
 
-            // Calculate average score
             const averageScore = completedLevels > 0 ? Math.round(totalPercentage / completedLevels) : 0;
             document.getElementById('averageScore').textContent = averageScore + '%';
 
-            // Load level progress
             loadLevelProgress();
-
-            // Load activity chart
             loadActivityChart();
         }
 
-        // Load level progress bars
+        // Load level progress (compact grid)
         function loadLevelProgress() {
-            const levels = [
-                { id: 1, name: 'Level 1 - Basic', icon: '🌱', total: 20 },
-                { id: 2, name: 'Level 2 - Intermediate', icon: '🔥', total: 20 },
-                { id: 3, name: 'Level 3 - Advanced', icon: '⚡', total: 20 },
-                { id: 4, name: 'Level 4 - EZ inimah', icon: '☠️', total: 20 },
-                { id: 5, name: 'Level 5 - Anak TK ini', icon: '🥱', total: 20 },
-                { id: 6, name: 'Level 6 - Fufufafa', icon: '😈', total: 20 }
-            ];
-
             const container = document.getElementById('levelProgress');
             container.innerHTML = '';
 
-            levels.forEach((level, index) => {
-                const completed = localStorage.getItem(`level_${level.id}_completed`) === 'true';
-                const percentage = parseInt(localStorage.getItem(`level_${level.id}_percentage`)) || 0;
-                const score = parseInt(localStorage.getItem(`level_${level.id}_score`)) || 0;
+            // Load first 5 levels
+            for (let i = 1; i <= 5; i++) {
+                const percentage = parseInt(localStorage.getItem(`level_${i}_percentage`)) || 0;
+                const completed = percentage === 100;
 
-                const progressHTML = `
-        <div class="level-progress-item" style="animation-delay: ${index * 0.1}s;">
-          <div class="level-progress-header">
-            <div class="level-progress-name">
-              <span style="font-size: 1.5rem;">${level.icon}</span>
-              <span>${level.name}</span>
-            </div>
-            <div class="level-progress-percentage">${percentage}%</div>
-          </div>
-          <div class="level-progress-bar">
-            <div class="level-progress-fill" style="width: ${percentage}%;"></div>
-          </div>
-          <div style="margin-top: 8px; font-size: 0.85rem; color: var(--text-secondary);">
-            ${completed ? `✅ Selesai - Skor: ${score}/${level.total * 5}` : '⏳ Belum dikerjakan'}
-          </div>
-        </div>
-      `;
+                const levelHTML = `
+                    <div class="level-progress-item ${completed ? 'completed' : ''}" onclick="goToLevel(${i})">
+                        <span class="level-icon">${levelEmojis[i]}</span>
+                        <div class="level-number">Level ${i}</div>
+                        <div class="level-percentage">${percentage}%</div>
+                        <div class="level-status">${completed ? '✅ Selesai' : '⏳ Progress'}</div>
+                    </div>
+                `;
+                container.innerHTML += levelHTML;
+            }
 
-                container.innerHTML += progressHTML;
-            });
+            // Add "Others" button
+            const othersButton = `
+                <button class="others-button" id="othersBtn" onclick="toggleOthers()">
+                    <span>🌏 Lihat Level 6-100</span>
+                    <span id="othersIcon">▼</span>
+                </button>
+            `;
+            container.innerHTML += othersButton;
+
+            // Add dropdown content
+            const othersDropdown = document.createElement('div');
+            othersDropdown.className = 'others-dropdown';
+            othersDropdown.id = 'othersDropdown';
+            
+            const othersGrid = document.createElement('div');
+            othersGrid.className = 'others-grid';
+
+            for (let i = 6; i <= 100; i++) {
+                const percentage = parseInt(localStorage.getItem(`level_${i}_percentage`)) || 0;
+                const completed = percentage === 100;
+
+                const levelDiv = document.createElement('div');
+                levelDiv.className = `level-progress-item ${completed ? 'completed' : ''}`;
+                levelDiv.onclick = () => goToLevel(i);
+                levelDiv.innerHTML = `
+                    <span class="level-icon">${levelEmojis[i]}</span>
+                    <div class="level-number">Lv ${i}</div>
+                    <div class="level-percentage">${percentage}%</div>
+                `;
+                othersGrid.appendChild(levelDiv);
+            }
+
+            othersDropdown.appendChild(othersGrid);
+            container.appendChild(othersDropdown);
         }
 
-        // Load activity chart (7 days)
+        // Toggle others dropdown
+        function toggleOthers() {
+            const dropdown = document.getElementById('othersDropdown');
+            const button = document.getElementById('othersBtn');
+            const icon = document.getElementById('othersIcon');
+
+            dropdown.classList.toggle('show');
+            button.classList.toggle('active');
+            icon.textContent = dropdown.classList.contains('show') ? '▲' : '▼';
+        }
+
+        // Go to specific level
+        function goToLevel(level) {
+            window.location.href = `lesson.html?level=${level}`;
+        }
+
+        // Load activity chart
         function loadActivityChart() {
             const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
             const container = document.getElementById('activityChart');
@@ -933,23 +1020,18 @@
             const today = new Date().getDay();
 
             days.forEach((day, index) => {
-                // Mock data - replace with actual activity data if you track it
                 const isActive = index <= today;
                 const count = isActive ? Math.floor(Math.random() * 10) : 0;
 
                 const dayHTML = `
-        <div class="activity-day ${isActive ? 'active' : ''}">
-          <div class="activity-day-name">${day}</div>
-          <div class="activity-day-count">${count}</div>
-        </div>
-      `;
-
+                    <div class="activity-day ${isActive ? 'active' : ''}">
+                        <div class="activity-day-name">${day}</div>
+                        <div class="activity-day-count">${count}</div>
+                    </div>
+                `;
                 container.innerHTML += dayHTML;
             });
         }
-
-        // Initialize
-        loadStatistics();
 
         // Clock Function
         function updateClock() {
@@ -974,9 +1056,6 @@
 
         updateClock();
         setInterval(updateClock, 1000);
-
-
-        
 
         // Theme Toggle
         function toggleTheme() {
@@ -1016,8 +1095,11 @@
             backdrop.classList.toggle('active');
         }
 
-        // Refresh stats every 2 seconds
-        setInterval(loadStatistics, 2000);
+        // Initialize
+        loadStatistics();
+
+        // Refresh stats every 20 seconds
+        setInterval(loadStatistics, 20000);
     </script>
 
 </body>
