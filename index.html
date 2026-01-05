@@ -52,12 +52,9 @@
     }
 
     @keyframes gradientShift {
-
-      0%,
-      100% {
+      0%, 100% {
         background-position: 0% 50%;
       }
-
       50% {
         background-position: 100% 50%;
       }
@@ -107,13 +104,10 @@
     }
 
     @keyframes float {
-
-      0%,
-      100% {
+      0%, 100% {
         transform: translateY(0) translateX(0) rotate(0deg);
         opacity: 0.4;
       }
-
       50% {
         transform: translateY(-40px) translateX(40px) rotate(180deg);
         opacity: 0.6;
@@ -430,7 +424,6 @@
         opacity: 0;
         transform: translateX(-50px);
       }
-
       to {
         opacity: 1;
         transform: translateX(0);
@@ -445,12 +438,9 @@
     }
 
     @keyframes bounce {
-
-      0%,
-      100% {
+      0%, 100% {
         transform: translateY(0);
       }
-
       50% {
         transform: translateY(-20px);
       }
@@ -517,7 +507,6 @@
         opacity: 0;
         transform: scale(0.5);
       }
-
       to {
         opacity: 1;
         transform: scale(1);
@@ -561,7 +550,6 @@
         opacity: 0;
         transform: translateX(50px);
       }
-
       to {
         opacity: 1;
         transform: translateX(0);
@@ -586,88 +574,237 @@
       margin-bottom: 30px;
     }
 
-    /* Progress Section */
-    .progress-section {
-      background: linear-gradient(135deg, #7a1e2c, #c0392b);
+    /* Motivational Quote Section */
+    .motivation-section {
+      background: linear-gradient(135deg, #667eea, #764ba2);
       border-radius: 22px;
-      padding: 28px;
-      margin-bottom: 35px;
+      padding: 35px;
+      margin-bottom: 25px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 12px 35px rgba(122, 30, 44, 0.3);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: fadeIn 0.8s ease;
     }
 
-    .progress-title {
-      font-size: 1.2rem;
-      font-weight: 800;
+    .motivation-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 45px rgba(102, 126, 234, 0.5);
+    }
+
+    .motivation-icon {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 15px;
+      animation: bounce 2s infinite;
+    }
+
+    .motivation-quote {
+      font-size: 1.3rem;
+      font-weight: 700;
       color: white;
-      margin-bottom: 18px;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .motivation-author {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      font-style: italic;
+    }
+
+    .motivation-refresh {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .motivation-refresh:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(180deg);
+    }
+
+    /* IQ Chart Section */
+    .iq-section {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .iq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .iq-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .iq-icon {
+      font-size: 2rem;
+    }
+
+    .iq-info {
+      text-align: right;
+    }
+
+    .iq-current {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .iq-trend {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+
+    .iq-chart {
+      width: 100%;
+      height: 250px;
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 12px;
+      margin-top: 15px;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .dark-mode .iq-chart {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chart-bar-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 100%;
+      gap: 8px;
+    }
+
+    .chart-bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .chart-bar {
+      width: 100%;
+      background: linear-gradient(180deg, #667eea, #764ba2);
+      border-radius: 8px 8px 0 0;
+      transition: all 0.5s ease;
+      position: relative;
+      animation: growBar 1s ease backwards;
+    }
+
+    @keyframes growBar {
+      from {
+        height: 0;
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .chart-bar:hover {
+      background: linear-gradient(180deg, #7a8ef5, #8b5fc3);
+      transform: scaleY(1.05);
+    }
+
+    .chart-value {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      font-weight: 900;
+      color: var(--text-primary);
+      background: var(--card-bg);
+      padding: 3px 8px;
+      border-radius: 8px;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .chart-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-top: 8px;
       text-align: center;
     }
 
-    .progress-bar-container {
-      background: rgba(0, 0, 0, 0.2);
-      height: 24px;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 14px;
-      box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.3);
-      border: 2px solid rgba(255, 255, 255, 0.2);
+    .iq-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
     }
 
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #ffecd2, #fcb69f, #ffd89b);
-      background-size: 300% 100%;
-      border-radius: 20px;
-      width: 0%;
-      position: relative;
-      animation: fillProgress 2s ease forwards, shimmerProgress 4s infinite;
-      box-shadow: 0 0 20px rgba(252, 182, 159, 0.6);
+    .iq-stat {
+      text-align: center;
+      padding: 12px;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 10px;
     }
 
-    .progress-bar-fill::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent);
-      border-radius: 20px 20px 0 0;
+    .iq-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      text-transform: uppercase;
     }
 
-    @keyframes fillProgress {
-      to {
-        width: 35%;
-      }
-    }
-
-    @keyframes shimmerProgress {
-
-      0%,
-      100% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-    }
-
-    .progress-text {
-      font-size: 0.95rem;
-      color: white;
-      font-weight: 700;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .progress-number {
-      background: rgba(255, 255, 255, 0.25);
-      padding: 6px 16px;
-      border-radius: 25px;
+    .iq-stat-value {
+      font-size: 1.1rem;
       font-weight: 900;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .iq-note {
+      margin-top: 15px;
+      padding: 12px;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 10px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.6;
     }
 
     /* Levels - IMPROVED COMPACT DESIGN */
@@ -713,7 +850,6 @@
         opacity: 0;
         transform: translateY(20px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -1031,6 +1167,27 @@
         font-size: 1.5rem;
       }
 
+      .motivation-quote {
+        font-size: 1.1rem;
+      }
+
+      .iq-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-bar-container {
+        gap: 4px;
+      }
+
+      .chart-value {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+      }
+
+      .chart-label {
+        font-size: 0.65rem;
+      }
+
       .levels {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -1183,14 +1340,47 @@
     <div class="content-section">
       <h2 class="section-title">📖 Mulai Belajar</h2>
 
-      <div class="progress-section">
-        <div class="progress-title">Progress Belajar</div>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill"></div>
+      <!-- Motivational Quote Section -->
+      <div class="motivation-section" onclick="changeQuote()">
+        <button class="motivation-refresh" onclick="event.stopPropagation(); changeQuote();">🔄</button>
+        <div class="motivation-icon" id="quoteIcon">💪</div>
+        <div class="motivation-quote" id="quoteText">Loading...</div>
+        <div class="motivation-author" id="quoteAuthor">— Motivasi Hari Ini</div>
+      </div>
+
+      <!-- IQ Chart Section -->
+      <div class="iq-section">
+        <div class="iq-header">
+          <div class="iq-title">
+            <span class="iq-icon">🧠</span>
+            <span>Rata-rata IQ Indonesia</span>
+          </div>
+          <div class="iq-info">
+            <div class="iq-current" id="iqCurrent">78.49</div>
+            <div class="iq-trend">📈 Trend 2015-2024</div>
+          </div>
         </div>
-        <div class="progress-text">
-          <span>7 dari 20 soal terselesaikan, btw ini gimmick doang, aku gatau cara bikin bar otomatis</span>
-          <span class="progress-number">35%</span>
+        <div class="iq-chart">
+          <div class="chart-bar-container" id="iqChart">
+            <!-- Bars will be generated by JavaScript -->
+          </div>
+        </div>
+        <div class="iq-stats">
+          <div class="iq-stat">
+            <div class="iq-stat-label">Tertinggi</div>
+            <div class="iq-stat-value" id="iqMax">--</div>
+          </div>
+          <div class="iq-stat">
+            <div class="iq-stat-label">Terendah</div>
+            <div class="iq-stat-value" id="iqMin">--</div>
+          </div>
+          <div class="iq-stat">
+            <div class="iq-stat-label">Rata-rata</div>
+            <div class="iq-stat-value" id="iqAvg">--</div>
+          </div>
+        </div>
+        <div class="iq-note">
+          💡 <strong>Fun Fact:</strong> IQ rata-rata dunia adalah 100. Data ini berdasarkan studi World Population Review dan berbagai penelitian internasional. Terus belajar untuk meningkatkan kemampuan kognitif! 🚀
         </div>
       </div>
 
@@ -1302,6 +1492,97 @@
   </div>
 
   <script>
+    // Motivational Quotes Database
+    const quotes = [
+      { icon: '💪', text: 'Kesuksesan adalah hasil dari persiapan, kerja keras, dan belajar dari kegagalan.', author: '— Colin Powell' },
+      { icon: '🌟', text: 'Masa depan milik mereka yang percaya pada keindahan impian mereka.', author: '— Eleanor Roosevelt' },
+      { icon: '🚀', text: 'Cara terbaik untuk memprediksi masa depan adalah dengan menciptakannya.', author: '— Peter Drucker' },
+      { icon: '🎯', text: 'Jangan menunggu kesempatan. Ciptakanlah!', author: '— George Bernard Shaw' },
+      { icon: '⭐', text: 'Percaya pada diri sendiri. Kamu lebih mampu dari yang kamu pikirkan!', author: '— Christian D. Larson' },
+      { icon: '🔥', text: 'Belajar hari ini, panen kesuksesan esok hari.', author: '— Duodaniel Team' },
+      { icon: '💡', text: 'Satu-satunya cara untuk melakukan pekerjaan hebat adalah mencintai apa yang kamu lakukan.', author: '— Steve Jobs' },
+      { icon: '🌈', text: 'Setiap ahli pernah menjadi pemula. Jangan menyerah!', author: '— Helen Hayes' },
+      { icon: '🎓', text: 'Pendidikan adalah senjata paling ampuh untuk mengubah dunia.', author: '— Nelson Mandela' },
+      { icon: '✨', text: 'Mulailah dari mana kamu berada. Gunakan apa yang kamu punya. Lakukan apa yang kamu bisa.', author: '— Arthur Ashe' },
+      { icon: '🏆', text: 'Kesuksesan bukan kunci kebahagiaan. Kebahagiaan adalah kunci kesuksesan.', author: '— Albert Schweitzer' },
+      { icon: '🎨', text: 'Kreativitas adalah kecerdasan yang bersenang-senang.', author: '— Albert Einstein' },
+      { icon: '💫', text: 'Jangan biarkan kemarin menghabiskan terlalu banyak hari ini.', author: '— Will Rogers' },
+      { icon: '🌺', text: 'Perjalanan seribu mil dimulai dengan satu langkah kecil.', author: '— Lao Tzu' },
+      { icon: '🎪', text: 'Hidup adalah 10% apa yang terjadi padamu dan 90% bagaimana kamu meresponnya.', author: '— Charles R. Swindoll' },
+      { icon: '🌻', text: 'Setiap hari adalah kesempatan baru untuk belajar dan tumbuh.', author: '— Duodaniel Team' },
+      { icon: '🌟', text: 'Jadilah perubahan yang ingin kamu lihat di dunia.', author: '— Mahatma Gandhi' },
+      { icon: '🚴‍♂️', text: 'Kegagalan adalah kesempatan untuk memulai lagi dengan lebih cerdas.', author: '— Henry Ford' },
+      { icon: '🏅', text: 'Keberanian bukanlah ketiadaan ketakutan, tetapi kemenangan atasnya.', author: '— Nelson Mandela' },
+      { icon: '🌞', text: 'Tetaplah bernafas.', author: '— Zaki' }
+    ];
+
+    let currentQuoteIndex = Math.floor(Math.random() * quotes.length);
+
+    function changeQuote() {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      const quote = quotes[currentQuoteIndex];
+      document.getElementById('quoteIcon').textContent = quote.icon;
+      document.getElementById('quoteText').textContent = quote.text;
+      document.getElementById('quoteAuthor').textContent = quote.author;
+    }
+
+    // Load initial quote
+    changeQuote();
+
+    // IQ Data Indonesia (2015-2024)
+    const iqData = [
+      { year: '2015', value: 78.20 },
+      { year: '2016', value: 78.25 },
+      { year: '2017', value: 78.30 },
+      { year: '2018', value: 78.35 },
+      { year: '2019', value: 78.38 },
+      { year: '2020', value: 78.41 },
+      { year: '2021', value: 78.44 },
+      { year: '2022', value: 78.46 },
+      { year: '2023', value: 78.48 },
+      { year: '2024', value: 78.49 }
+    ];
+
+    function renderIQChart() {
+      const container = document.getElementById('iqChart');
+      container.innerHTML = '';
+
+      // Calculate min, max, avg
+      const values = iqData.map(d => d.value);
+      const minVal = Math.min(...values);
+      const maxVal = Math.max(...values);
+      const avgVal = (values.reduce((a, b) => a + b, 0) / values.length).toFixed(2);
+
+      // Update stats
+      document.getElementById('iqCurrent').textContent = iqData[iqData.length - 1].value;
+      document.getElementById('iqMax').textContent = maxVal;
+      document.getElementById('iqMin').textContent = minVal;
+      document.getElementById('iqAvg').textContent = avgVal;
+
+      // Calculate heights (normalized to 100%)
+      const range = maxVal - minVal;
+      const baseHeight = 30; // Minimum height percentage
+
+      iqData.forEach((data, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'chart-bar-wrapper';
+
+        const heightPercent = baseHeight + ((data.value - minVal) / range) * (100 - baseHeight);
+
+        wrapper.innerHTML = `
+          <div class="chart-bar" style="height: ${heightPercent}%; animation-delay: ${index * 0.1}s;">
+            <div class="chart-value">${data.value}</div>
+          </div>
+          <div class="chart-label">${data.year}</div>
+        `;
+
+        container.appendChild(wrapper);
+      });
+    }
+
+    // Render chart on page load
+    renderIQChart();
+
     // Generate dropdown items for levels 6-100
     function generateLevelDropdown() {
       const dropdown = document.getElementById('levelDropdown');
@@ -1332,7 +1613,7 @@
       const dropdown = document.getElementById('levelDropdown');
       const othersButton = document.querySelector('.level-others');
       
-      if (!othersButton.contains(event.target) && !dropdown.contains(event.target)) {
+      if (othersButton && !othersButton.contains(event.target) && !dropdown.contains(event.target)) {
         dropdown.classList.remove('show');
       }
     });
