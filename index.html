@@ -401,22 +401,30 @@
     .container {
       width: 100%;
       margin-left: 0;
-      height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       position: relative;
       z-index: 1;
       transition: none;
     }
 
-    /* Hero Section */
+    /* Hero Section - Full Width Horizontal */
     .hero-section {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      flex-direction: row;
+      justify-content: space-between;
       align-items: center;
-      padding: 60px;
+      padding: 80px 60px 60px;
       animation: slideInLeft 0.8s ease;
+      gap: 60px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
     }
 
     @keyframes slideInLeft {
@@ -452,6 +460,7 @@
       color: white;
       margin-bottom: 20px;
       text-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+      text-align: left;
     }
 
     .subtitle {
@@ -460,6 +469,7 @@
       font-size: 1.5rem;
       font-weight: 600;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      text-align: left;
     }
 
     .description {
@@ -468,7 +478,7 @@
       font-size: 1.1rem;
       line-height: 1.8;
       max-width: 500px;
-      text-align: center;
+      text-align: left;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
@@ -535,24 +545,24 @@
       letter-spacing: 1px;
     }
 
-    /* Content Section */
+    /* Content Section - Full Width */
     .content-section {
       background: var(--content-bg);
       backdrop-filter: blur(20px);
       padding: 60px;
-      overflow-y: auto;
-      box-shadow: -30px 0 60px var(--shadow);
+      width: 100%;
+      box-shadow: 0 -30px 60px var(--shadow);
       animation: slideInRight 0.8s ease;
     }
 
     @keyframes slideInRight {
       from {
         opacity: 0;
-        transform: translateX(50px);
+        transform: translateY(50px);
       }
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
       }
     }
 
@@ -572,6 +582,18 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 30px;
+    }
+
+    /* Two Column Layout for Content */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .content-full {
+      grid-column: 1 / -1;
     }
 
     /* Motivational Quote Section */
@@ -810,7 +832,7 @@
     /* Levels - IMPROVED COMPACT DESIGN */
     .levels {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 15px;
       margin-bottom: 35px;
     }
@@ -1031,6 +1053,277 @@
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     }
 
+    /* SNBT Section */
+    .snbt-section {
+      margin-bottom: 35px;
+    }
+
+    .snbt-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .snbt-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .snbt-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .snbt-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 25px;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      animation: slideInSNBT 0.6s ease backwards;
+    }
+
+    .snbt-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .snbt-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .snbt-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .snbt-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes slideInSNBT {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .snbt-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .snbt-card:hover::before {
+      left: 100%;
+    }
+
+    .snbt-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .snbt-card.tps {
+      border-left: 5px solid #f093fb;
+      background: linear-gradient(135deg, rgba(240, 147, 251, 0.05), rgba(245, 87, 108, 0.05));
+    }
+
+    .snbt-card.indo {
+      border-left: 5px solid #667eea;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    }
+
+    .snbt-card.english {
+      border-left: 5px solid #48bb78;
+      background: linear-gradient(135deg, rgba(72, 187, 120, 0.05), rgba(56, 161, 105, 0.05));
+    }
+
+    .snbt-card.math {
+      border-left: 5px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(251, 191, 36, 0.05));
+    }
+
+    .snbt-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .snbt-card-icon {
+      font-size: 3rem;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    }
+
+    .snbt-card-badge {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .dark-mode .snbt-card-badge {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .snbt-card.tps .snbt-card-badge {
+      color: #c026d3;
+    }
+
+    .snbt-card.indo .snbt-card-badge {
+      color: #4f46e5;
+    }
+
+    .snbt-card.english .snbt-card-badge {
+      color: #059669;
+    }
+
+    .snbt-card.math .snbt-card-badge {
+      color: #d97706;
+    }
+
+    .snbt-card-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .snbt-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .snbt-card-stats {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .snbt-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .snbt-stat-icon {
+      font-size: 1rem;
+    }
+
+    .snbt-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 15px;
+      border-top: 2px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dark-mode .snbt-card-footer {
+      border-top-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .snbt-progress {
+      flex: 1;
+    }
+
+    .snbt-progress-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .snbt-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .dark-mode .snbt-progress-bar {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .snbt-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f093fb, #f5576c);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .snbt-card.tps .snbt-progress-fill {
+      background: linear-gradient(90deg, #f093fb, #f5576c);
+    }
+
+    .snbt-card.indo .snbt-progress-fill {
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .snbt-card.english .snbt-progress-fill {
+      background: linear-gradient(90deg, #48bb78, #38a169);
+    }
+
+    .snbt-card.math .snbt-progress-fill {
+      background: linear-gradient(90deg, #f59e0b, #fb923c);
+    }
+
+    .snbt-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #1e3c72, #7a1e2c);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .snbt-action:hover {
+      transform: translateX(5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Features */
+    .features {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
     .features-title {
       font-size: 1rem;
       font-weight: 800;
@@ -1118,29 +1411,37 @@
       .container {
         width: 100%;
         margin-left: 0;
-        grid-template-columns: 1fr;
-        height: auto;
       }
 
       .hero-section {
+        flex-direction: column;
         padding: 80px 25px 40px;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+        text-align: center;
+      }
+
+      .description {
+        font-size: 0.95rem;
+        text-align: center;
+        max-width: 100%;
       }
 
       .logo {
         font-size: 3.5rem;
         animation: none;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      .subtitle {
-        font-size: 1.1rem;
-      }
-
-      .description {
-        font-size: 0.95rem;
       }
 
       .stats {
@@ -1160,7 +1461,11 @@
         padding: 35px 25px;
         box-shadow: none;
         border-radius: 30px 30px 0 0;
-        margin-top: -20px;
+        margin-top: 0;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
       }
 
       .section-title {
@@ -1211,6 +1516,37 @@
 
       .feature-list {
         grid-template-columns: 1fr;
+      }
+
+      .snbt-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .snbt-title {
+        font-size: 1.4rem;
+      }
+
+      .snbt-card {
+        animation: none;
+      }
+
+      .snbt-card-icon {
+        font-size: 2.5rem;
+      }
+
+      .snbt-card-title {
+        font-size: 1.2rem;
+      }
+
+      .snbt-card-footer {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .snbt-action {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
       }
     }
   </style>
@@ -1314,11 +1650,13 @@
   <div class="container" id="container">
     <!-- HERO -->
     <div class="hero-section">
-      <div class="logo">📚</div>
-      <h1>Duodaniel</h1>
-      <p class="subtitle">Belajar Bahasa Inggris dengan Mudah</p>
-      <p class="description">Tingkatkan kemampuan bahasa Inggrismu dari nol hingga mahir! Pilih level sesuai
-        kemampuanmu.</p>
+      <div class="hero-content">
+        <div class="logo">📚</div>
+        <h1>Duodaniel</h1>
+        <p class="subtitle">Belajar Bahasa Inggris dengan Mudah</p>
+        <p class="description">Tingkatkan kemampuan bahasa Inggrismu dari nol hingga mahir! Pilih level sesuai
+          kemampuanmu.</p>
+      </div>
 
       <div class="stats">
         <div class="stat-box">
@@ -1338,18 +1676,25 @@
 
     <!-- CONTENT -->
     <div class="content-section">
-      <h2 class="section-title">📖 Mulai Belajar</h2>
+      <div class="content-grid">
+        <!-- Left Column -->
+        <div>
+          <h2 class="section-title">📖 Mulai Belajar</h2>
 
-      <!-- Motivational Quote Section -->
-      <div class="motivation-section" onclick="changeQuote()">
-        <button class="motivation-refresh" onclick="event.stopPropagation(); changeQuote();">🔄</button>
-        <div class="motivation-icon" id="quoteIcon">💪</div>
-        <div class="motivation-quote" id="quoteText">Loading...</div>
-        <div class="motivation-author" id="quoteAuthor">— Motivasi Hari Ini</div>
-      </div>
+          <!-- Motivational Quote Section -->
+          <div class="motivation-section" onclick="changeQuote()">
+            <button class="motivation-refresh" onclick="event.stopPropagation(); changeQuote();">🔄</button>
+            <div class="motivation-icon" id="quoteIcon">💪</div>
+            <div class="motivation-quote" id="quoteText">Loading...</div>
+            <div class="motivation-author" id="quoteAuthor">— Motivasi Hari Ini</div>
+          </div>
+        </div>
 
-      <!-- IQ Chart Section -->
-      <div class="iq-section">
+        <!-- Right Column -->
+        <div>
+          <h2 class="section-title" style="opacity: 0;">.</h2>
+          <!-- IQ Chart Section -->
+          <div class="iq-section">
         <div class="iq-header">
           <div class="iq-title">
             <span class="iq-icon">🧠</span>
@@ -1382,8 +1727,12 @@
         <div class="iq-note">
           💡 <strong>Fun Fact:</strong> IQ rata-rata dunia adalah 100. Data ini berdasarkan studi World Population Review dan berbagai penelitian internasional. Terus belajar untuk meningkatkan kemampuan kognitif! 🚀
         </div>
+          </div>
+        </div>
       </div>
 
+      <!-- Full Width Sections -->
+      <h2 class="section-title">🎯 Pilih Level Bahasa Inggris</h2>
       <div class="levels">
         <a href="lesson.html?level=1" class="level-card">
           <button class="level level-1">
@@ -1448,6 +1797,155 @@
           <div class="level-dropdown" id="levelDropdown">
             <!-- Levels 6-100 will be generated by JavaScript -->
           </div>
+        </div>
+      </div>
+
+      <!-- SNBT Section -->
+      <div class="snbt-section">
+        <h2 class="snbt-title">
+          <span>🎓</span>
+          <span>Latihan Soal SNBT</span>
+        </h2>
+        <p class="snbt-subtitle">
+          Persiapkan diri untuk menghadapi Seleksi Nasional Berdasarkan Tes (SNBT) dengan latihan soal komprehensif dari berbagai kategori.
+        </p>
+
+        <div class="snbt-cards">
+          <!-- TPS Card -->
+          <a href="snbt.html?type=tps" class="snbt-card tps">
+            <div class="snbt-card-header">
+              <div class="snbt-card-icon">🧠</div>
+              <div class="snbt-card-badge">TPS</div>
+            </div>
+            <div class="snbt-card-title">Tes Potensi Skolastik</div>
+            <div class="snbt-card-desc">
+              Uji kemampuan penalaran umum, pengetahuan kuantitatif, dan pemahaman bacaan.
+            </div>
+            <div class="snbt-card-stats">
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">📝</span>
+                <span>100 Soal</span>
+              </div>
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">⏱️</span>
+                <span>120 Menit</span>
+              </div>
+            </div>
+            <div class="snbt-card-footer">
+              <div class="snbt-progress">
+                <div class="snbt-progress-label">Progress: 0%</div>
+                <div class="snbt-progress-bar">
+                  <div class="snbt-progress-fill" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="snbt-action">
+                <span>Mulai</span>
+                <span>→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Bahasa Indonesia Card -->
+          <a href="snbt.html?type=indo" class="snbt-card indo">
+            <div class="snbt-card-header">
+              <div class="snbt-card-icon">📚</div>
+              <div class="snbt-card-badge">Literasi</div>
+            </div>
+            <div class="snbt-card-title">Bahasa Indonesia</div>
+            <div class="snbt-card-desc">
+              Latihan pemahaman teks, analisis wacana, dan kemampuan berbahasa Indonesia.
+            </div>
+            <div class="snbt-card-stats">
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">📝</span>
+                <span>50 Soal</span>
+              </div>
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">⏱️</span>
+                <span>60 Menit</span>
+              </div>
+            </div>
+            <div class="snbt-card-footer">
+              <div class="snbt-progress">
+                <div class="snbt-progress-label">Progress: 0%</div>
+                <div class="snbt-progress-bar">
+                  <div class="snbt-progress-fill" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="snbt-action">
+                <span>Mulai</span>
+                <span>→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Bahasa Inggris Card -->
+          <a href="snbt.html?type=english" class="snbt-card english">
+            <div class="snbt-card-header">
+              <div class="snbt-card-icon">🌐</div>
+              <div class="snbt-card-badge">Literasi</div>
+            </div>
+            <div class="snbt-card-title">Bahasa Inggris</div>
+            <div class="snbt-card-desc">
+              Reading comprehension, grammar, vocabulary, dan analisis teks berbahasa Inggris.
+            </div>
+            <div class="snbt-card-stats">
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">📝</span>
+                <span>50 Soal</span>
+              </div>
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">⏱️</span>
+                <span>60 Menit</span>
+              </div>
+            </div>
+            <div class="snbt-card-footer">
+              <div class="snbt-progress">
+                <div class="snbt-progress-label">Progress: 0%</div>
+                <div class="snbt-progress-bar">
+                  <div class="snbt-progress-fill" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="snbt-action">
+                <span>Mulai</span>
+                <span>→</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Penalaran Matematika Card -->
+          <a href="snbt.html?type=math" class="snbt-card math">
+            <div class="snbt-card-header">
+              <div class="snbt-card-icon">🔢</div>
+              <div class="snbt-card-badge">Literasi</div>
+            </div>
+            <div class="snbt-card-title">Penalaran Matematika</div>
+            <div class="snbt-card-desc">
+              Soal logika matematis, penalaran kuantitatif, dan pemecahan masalah numerik.
+            </div>
+            <div class="snbt-card-stats">
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">📝</span>
+                <span>50 Soal</span>
+              </div>
+              <div class="snbt-stat-item">
+                <span class="snbt-stat-icon">⏱️</span>
+                <span>60 Menit</span>
+              </div>
+            </div>
+            <div class="snbt-card-footer">
+              <div class="snbt-progress">
+                <div class="snbt-progress-label">Progress: 0%</div>
+                <div class="snbt-progress-bar">
+                  <div class="snbt-progress-fill" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="snbt-action">
+                <span>Mulai</span>
+                <span>→</span>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -1687,6 +2185,30 @@
       document.getElementById('mainScore').textContent = totalScore;
       document.getElementById('sidebarScore').textContent = totalScore;
     }
+
+    // Load SNBT progress from localStorage
+    function loadSNBTProgress() {
+      const types = ['tps', 'indo', 'english', 'math'];
+      
+      types.forEach(type => {
+        const percentage = parseInt(localStorage.getItem(`snbt_${type}_percentage`)) || 0;
+        const card = document.querySelector(`.snbt-card.${type}`);
+        
+        if (card && percentage > 0) {
+          const progressLabel = card.querySelector('.snbt-progress-label');
+          const progressFill = card.querySelector('.snbt-progress-fill');
+          
+          if (progressLabel) progressLabel.textContent = `Progress: ${percentage}%`;
+          if (progressFill) progressFill.style.width = `${percentage}%`;
+        }
+      });
+    }
+
+    // Load SNBT progress on page load
+    loadSNBTProgress();
+
+    // Refresh SNBT progress every 5 seconds
+    setInterval(loadSNBTProgress, 5000);
   </script>
 
 </body>
