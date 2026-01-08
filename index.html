@@ -829,6 +829,208 @@
       line-height: 1.6;
     }
 
+    /* SNBT Passing Score Chart */
+    .snbt-score-section {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      margin-bottom: 25px;
+    }
+
+    .snbt-score-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .snbt-score-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .snbt-score-icon {
+      font-size: 2rem;
+    }
+
+    .university-selector {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .university-dropdown {
+      background: var(--content-bg);
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 15px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+      min-width: 200px;
+    }
+
+    .university-dropdown:hover {
+      border-color: #667eea;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+    }
+
+    .university-dropdown:focus {
+      border-color: #667eea;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .dark-mode .university-dropdown {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .snbt-info-box {
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .snbt-info-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .snbt-info-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .snbt-info-text strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .snbt-chart {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .dark-mode .snbt-chart {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .snbt-chart::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .snbt-chart::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 10px;
+    }
+
+    .snbt-chart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      margin-bottom: 10px;
+      background: var(--content-bg);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .snbt-chart-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-left-color: #667eea;
+    }
+
+    .snbt-chart-major {
+      flex: 1;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .snbt-chart-score {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .snbt-score-value {
+      font-size: 1.3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .snbt-score-bar {
+      width: 100px;
+      height: 8px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dark-mode .snbt-score-bar {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .snbt-score-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .snbt-legend {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .snbt-legend-item {
+      text-align: center;
+      padding: 12px;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 10px;
+    }
+
+    .snbt-legend-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .snbt-legend-value {
+      font-size: 1.1rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     /* Levels - IMPROVED COMPACT DESIGN */
     .levels {
       display: grid;
@@ -1548,6 +1750,35 @@
         justify-content: center;
         margin-left: 0;
       }
+
+      .snbt-score-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .university-dropdown {
+        width: 100%;
+      }
+
+      .snbt-legend {
+        grid-template-columns: 1fr;
+      }
+
+      .snbt-chart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .snbt-chart-score {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .snbt-score-bar {
+        flex: 1;
+        min-width: 80px;
+      }
     }
   </style>
 </head>
@@ -1687,6 +1918,56 @@
             <div class="motivation-icon" id="quoteIcon">💪</div>
             <div class="motivation-quote" id="quoteText">Loading...</div>
             <div class="motivation-author" id="quoteAuthor">— Motivasi Hari Ini</div>
+          </div>
+
+          <!-- SNBT Passing Score Chart -->
+          <div class="snbt-score-section">
+            <div class="snbt-score-header">
+              <div class="snbt-score-title">
+                <span class="snbt-score-icon">🎓</span>
+                <span>Passing Grade SNBT</span>
+              </div>
+              <div class="university-selector">
+                <select class="university-dropdown" id="universitySelect" onchange="loadPassingScores()">
+                  <option value="ui">Universitas Indonesia</option>
+                  <option value="itb">Institut Teknologi Bandung</option>
+                  <option value="ugm">Universitas Gadjah Mada</option>
+                  <option value="its">Institut Teknologi Sepuluh Nopember</option>
+                  <option value="unair">Universitas Airlangga</option>
+                  <option value="undip">Universitas Diponegoro</option>
+                  <option value="unpad">Universitas Padjadjaran</option>
+                  <option value="upi">Universitas Pendidikan Indonesia</option>
+                  <option value="uns">Universitas Sebelas Maret</option>
+                  <option value="unhas">Universitas Hasanuddin</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="snbt-info-box">
+              <div class="snbt-info-icon">💡</div>
+              <div class="snbt-info-text">
+                <strong>Info:</strong> Passing grade berikut adalah estimasi berdasarkan data tahun lalu. Skor minimum untuk lolos seleksi bisa berubah setiap tahun tergantung daya saing.
+              </div>
+            </div>
+
+            <div class="snbt-chart" id="snbtChart">
+              <!-- Will be populated by JavaScript -->
+            </div>
+
+            <div class="snbt-legend">
+              <div class="snbt-legend-item">
+                <div class="snbt-legend-label">Tertinggi</div>
+                <div class="snbt-legend-value" id="snbtMax">--</div>
+              </div>
+              <div class="snbt-legend-item">
+                <div class="snbt-legend-label">Terendah</div>
+                <div class="snbt-legend-value" id="snbtMin">--</div>
+              </div>
+              <div class="snbt-legend-item">
+                <div class="snbt-legend-label">Rata-rata</div>
+                <div class="snbt-legend-value" id="snbtAvg">--</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2021,6 +2302,171 @@
 
     // Load initial quote
     changeQuote();
+
+    // SNBT Passing Score Data by University
+    const snbtPassingScores = {
+      ui: [
+        { major: 'Kedokteran', score: 685 },
+        { major: 'Teknik Informatika', score: 658 },
+        { major: 'Akuntansi', score: 642 },
+        { major: 'Psikologi', score: 638 },
+        { major: 'Hukum', score: 635 },
+        { major: 'Manajemen', score: 628 },
+        { major: 'Ilmu Komunikasi', score: 625 },
+        { major: 'Teknik Elektro', score: 620 },
+        { major: 'Arsitektur', score: 615 },
+        { major: 'Farmasi', score: 610 }
+      ],
+      itb: [
+        { major: 'Teknik Informatika', score: 672 },
+        { major: 'Teknik Elektro', score: 665 },
+        { major: 'Teknik Mesin', score: 658 },
+        { major: 'Teknik Kimia', score: 655 },
+        { major: 'Teknik Sipil', score: 650 },
+        { major: 'Teknik Industri', score: 648 },
+        { major: 'Arsitektur', score: 645 },
+        { major: 'Matematika', score: 638 },
+        { major: 'Fisika', score: 635 },
+        { major: 'Farmasi', score: 630 }
+      ],
+      ugm: [
+        { major: 'Kedokteran', score: 680 },
+        { major: 'Teknik Informatika', score: 655 },
+        { major: 'Akuntansi', score: 645 },
+        { major: 'Psikologi', score: 640 },
+        { major: 'Hukum', score: 638 },
+        { major: 'Manajemen', score: 632 },
+        { major: 'Teknik Elektro', score: 628 },
+        { major: 'Ilmu Komunikasi', score: 625 },
+        { major: 'Arsitektur', score: 620 },
+        { major: 'Farmasi', score: 615 }
+      ],
+      its: [
+        { major: 'Teknik Informatika', score: 665 },
+        { major: 'Teknik Elektro', score: 658 },
+        { major: 'Teknik Perkapalan', score: 650 },
+        { major: 'Teknik Sipil', score: 645 },
+        { major: 'Teknik Mesin', score: 642 },
+        { major: 'Sistem Informasi', score: 638 },
+        { major: 'Teknik Kimia', score: 635 },
+        { major: 'Teknik Industri', score: 630 },
+        { major: 'Arsitektur', score: 625 },
+        { major: 'Matematika', score: 620 }
+      ],
+      unair: [
+        { major: 'Kedokteran', score: 675 },
+        { major: 'Farmasi', score: 648 },
+        { major: 'Psikologi', score: 642 },
+        { major: 'Akuntansi', score: 638 },
+        { major: 'Hukum', score: 635 },
+        { major: 'Ilmu Komunikasi', score: 630 },
+        { major: 'Manajemen', score: 625 },
+        { major: 'Kesehatan Masyarakat', score: 620 },
+        { major: 'Keperawatan', score: 615 },
+        { major: 'Kedokteran Gigi', score: 610 }
+      ],
+      undip: [
+        { major: 'Kedokteran', score: 670 },
+        { major: 'Teknik Informatika', score: 645 },
+        { major: 'Akuntansi', score: 638 },
+        { major: 'Psikologi', score: 635 },
+        { major: 'Hukum', score: 630 },
+        { major: 'Teknik Elektro', score: 625 },
+        { major: 'Manajemen', score: 620 },
+        { major: 'Ilmu Komunikasi', score: 618 },
+        { major: 'Teknik Sipil', score: 615 },
+        { major: 'Farmasi', score: 610 }
+      ],
+      unpad: [
+        { major: 'Kedokteran', score: 672 },
+        { major: 'Farmasi', score: 645 },
+        { major: 'Psikologi', score: 640 },
+        { major: 'Akuntansi', score: 635 },
+        { major: 'Hukum', score: 632 },
+        { major: 'Ilmu Komunikasi', score: 628 },
+        { major: 'Manajemen', score: 625 },
+        { major: 'Teknik Informatika', score: 620 },
+        { major: 'Hubungan Internasional', score: 618 },
+        { major: 'Teknik Geologi', score: 615 }
+      ],
+      upi: [
+        { major: 'PGSD', score: 625 },
+        { major: 'Pendidikan Bahasa Inggris', score: 620 },
+        { major: 'Pendidikan Matematika', score: 618 },
+        { major: 'Psikologi', score: 615 },
+        { major: 'Akuntansi', score: 612 },
+        { major: 'Ilmu Komunikasi', score: 610 },
+        { major: 'Manajemen', score: 608 },
+        { major: 'Pendidikan IPA', score: 605 },
+        { major: 'Teknik Informatika', score: 602 },
+        { major: 'Pendidikan Guru PAUD', score: 600 }
+      ],
+      uns: [
+        { major: 'Kedokteran', score: 665 },
+        { major: 'Akuntansi', score: 635 },
+        { major: 'Teknik Informatika', score: 630 },
+        { major: 'Psikologi', score: 628 },
+        { major: 'Hukum', score: 625 },
+        { major: 'Manajemen', score: 620 },
+        { major: 'Ilmu Komunikasi', score: 618 },
+        { major: 'Farmasi', score: 615 },
+        { major: 'Teknik Sipil', score: 612 },
+        { major: 'Pendidikan Dokter', score: 610 }
+      ],
+      unhas: [
+        { major: 'Kedokteran', score: 668 },
+        { major: 'Teknik Informatika', score: 638 },
+        { major: 'Akuntansi', score: 632 },
+        { major: 'Hukum', score: 628 },
+        { major: 'Psikologi', score: 625 },
+        { major: 'Manajemen', score: 620 },
+        { major: 'Ilmu Komunikasi', score: 618 },
+        { major: 'Teknik Elektro', score: 615 },
+        { major: 'Farmasi', score: 612 },
+        { major: 'Teknik Sipil', score: 610 }
+      ]
+    };
+
+    function loadPassingScores() {
+      const university = document.getElementById('universitySelect').value;
+      const data = snbtPassingScores[university];
+      const container = document.getElementById('snbtChart');
+      
+      container.innerHTML = '';
+
+      // Calculate stats
+      const scores = data.map(d => d.score);
+      const maxScore = Math.max(...scores);
+      const minScore = Math.min(...scores);
+      const avgScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+
+      // Update legend
+      document.getElementById('snbtMax').textContent = maxScore;
+      document.getElementById('snbtMin').textContent = minScore;
+      document.getElementById('snbtAvg').textContent = avgScore;
+
+      // Render chart items
+      data.forEach((item, index) => {
+        const percentage = ((item.score - minScore) / (maxScore - minScore)) * 100;
+        
+        const itemEl = document.createElement('div');
+        itemEl.className = 'snbt-chart-item';
+        itemEl.style.animationDelay = `${index * 0.05}s`;
+        itemEl.innerHTML = `
+          <div class="snbt-chart-major">${item.major}</div>
+          <div class="snbt-chart-score">
+            <div class="snbt-score-value">${item.score}</div>
+            <div class="snbt-score-bar">
+              <div class="snbt-score-bar-fill" style="width: ${percentage}%"></div>
+            </div>
+          </div>
+        `;
+        container.appendChild(itemEl);
+      });
+    }
+
+    // Load initial passing scores
+    loadPassingScores();
 
     // IQ Data Indonesia (2015-2024)
     const iqData = [
