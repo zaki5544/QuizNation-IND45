@@ -1,2 +1,2 @@
-# Duodaniel
+# Quiznation
 adalah pokoknya
