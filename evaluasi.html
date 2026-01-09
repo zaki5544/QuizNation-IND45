@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,9 +51,12 @@
         }
 
         @keyframes gradientShift {
-            0%, 100% {
+
+            0%,
+            100% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
@@ -102,10 +106,13 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) translateX(0) rotate(0deg);
                 opacity: 0.4;
             }
+
             50% {
                 transform: translateY(-40px) translateX(40px) rotate(180deg);
                 opacity: 0.6;
@@ -414,6 +421,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -452,16 +460,28 @@
             animation: slideUp 0.6s ease backwards;
         }
 
-        .stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+        .stat-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .stat-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -535,7 +555,7 @@
 
         .snbt-total-label {
             font-size: 1rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
             margin-bottom: 10px;
             text-transform: uppercase;
@@ -546,12 +566,12 @@
             font-size: 4rem;
             font-weight: 900;
             color: white;
-            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
         .snbt-total-status {
             font-size: 1.1rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             margin-top: 10px;
         }
 
@@ -750,7 +770,7 @@
         .level-progress-bar {
             width: 100%;
             height: 6px;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -830,6 +850,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-animation">
         <div class="circle"></div>
@@ -876,7 +897,7 @@
             </div>
             <div class="sidebar-stat-item">
                 <span class="sidebar-stat-label">Level Selesai</span>
-                <span class="sidebar-stat-value" id="sidebarCompleted">0/12</span>
+                <span class="sidebar-stat-value" id="sidebarCompleted">0/84</span>
             </div>
         </div>
 
@@ -996,56 +1017,56 @@
             const types = ['tps', 'indo', 'english', 'math'];
             let totalScore = 0;
             let completedCategories = 0;
-            
+
             types.forEach(type => {
                 let typeTotal = 0;
                 let typeCompleted = 0;
                 let bestPercentage = 0;
-                
-                // Check all 3 levels for this type
-                for (let level = 1; level <= 3; level++) {
+
+                // Check all 20 levels for this type
+                for (let level = 1; level <= 21; level++) {
                     const score = parseInt(localStorage.getItem(`snbt_${type}_level${level}_score`)) || 0;
                     const percentage = parseInt(localStorage.getItem(`snbt_${type}_level${level}_percentage`)) || 0;
                     const completed = localStorage.getItem(`snbt_${type}_level${level}_completed`) === 'true';
-                    
+
                     typeTotal += score;
                     if (completed) typeCompleted++;
                     if (percentage > bestPercentage) bestPercentage = percentage;
                 }
-                
+
                 totalScore += typeTotal;
                 if (typeCompleted > 0) completedCategories++;
-                
+
                 // Update UI for each type
-                const capitalizedType = type === 'tps' ? 'Tps' : 
-                                       type === 'indo' ? 'Indo' : 
-                                       type === 'english' ? 'English' : 'Math';
-                
+                const capitalizedType = type === 'tps' ? 'Tps' :
+                    type === 'indo' ? 'Indo' :
+                        type === 'english' ? 'English' : 'Math';
+
                 const scoreEl = document.getElementById(`snbt${capitalizedType}Score`);
                 const percentageEl = document.getElementById(`snbt${capitalizedType}Percentage`);
-                
+
                 if (scoreEl) scoreEl.textContent = typeTotal;
                 if (percentageEl) {
                     if (typeCompleted > 0) {
-                        percentageEl.textContent = `${bestPercentage}% - ${typeCompleted}/3 level`;
+                        percentageEl.textContent = `${bestPercentage}% - ${typeCompleted}/21 level`;
                     } else {
                         percentageEl.textContent = '0% - Belum mengerjakan';
                     }
                 }
             });
-            
+
             // Update total score
             document.getElementById('snbtTotalScore').textContent = totalScore;
-            
+
             if (completedCategories === 0) {
                 document.getElementById('snbtTotalStatus').textContent = 'Belum ada data - Mulai kerjakan quiz SNBT!';
             } else {
                 document.getElementById('snbtTotalStatus').textContent = `${completedCategories}/4 kategori telah dikerjakan`;
             }
-            
+
             // Generate recommendations
             generateProdiRecommendation(totalScore, types);
-            
+
             // Load SNBT level progress
             loadSNBTLevelProgress();
         }
@@ -1053,7 +1074,7 @@
         // Generate Prodi Recommendation
         function generateProdiRecommendation(totalScore, types) {
             const container = document.getElementById('prodiRecommendation');
-            
+
             if (totalScore === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -1068,33 +1089,33 @@
                 `;
                 return;
             }
-            
+
             // Calculate individual scores
             let tpsScore = 0;
             let indoScore = 0;
             let engScore = 0;
             let mathScore = 0;
-            
-            for (let level = 1; level <= 3; level++) {
+
+            for (let level = 1; level <= 21; level++) {
                 tpsScore += parseInt(localStorage.getItem(`snbt_tps_level${level}_score`)) || 0;
                 indoScore += parseInt(localStorage.getItem(`snbt_indo_level${level}_score`)) || 0;
                 engScore += parseInt(localStorage.getItem(`snbt_english_level${level}_score`)) || 0;
                 mathScore += parseInt(localStorage.getItem(`snbt_math_level${level}_score`)) || 0;
             }
-            
+
             // Determine strengths
             const scores = {
                 tps: tpsScore,
                 literasi: indoScore + engScore,
                 matematika: mathScore
             };
-            
+
             const maxScore = Math.max(scores.tps, scores.literasi, scores.matematika);
             let strength = '';
             if (scores.tps === maxScore) strength = 'tps';
             else if (scores.literasi === maxScore) strength = 'literasi';
             else strength = 'matematika';
-            
+
             // Recommendations database
             const recommendations = {
                 tps: {
@@ -1134,9 +1155,9 @@
                     ]
                 }
             };
-            
+
             const rec = recommendations[strength];
-            
+
             let html = `
                 <div class="prodi-recommendation">
                     <div class="prodi-header">
@@ -1154,7 +1175,7 @@
                         </div>
                         <div class="prodi-list">
             `;
-            
+
             rec.prodi.forEach((prodi, index) => {
                 const canPass = totalScore >= prodi.passingGrade;
                 html += `
@@ -1170,7 +1191,7 @@
                     </div>
                 `;
             });
-            
+
             html += `
                         </div>
                     </div>
@@ -1178,14 +1199,12 @@
                     <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05)); border-left: 4px solid #3b82f6; border-radius: 10px; padding: 18px; display: flex; gap: 12px;">
                         <div style="font-size: 1.8rem;">💡</div>
                         <div style="font-size: 0.95rem; line-height: 1.7; color: var(--text-primary);">
-                            <strong style="color: #3b82f6;">Tips:</strong> Rekomendasi ini berdasarkan kekuatan skormu saat ini. 
-                            Untuk meningkatkan peluang, fokus tingkatkan skor di kategori yang masih lemah 
-                            dan ulangi level yang belum mencapai 100%!
+                            <strong style="color: #3b82f6;">Tips:</strong> Rekomendasi ini berdasarkan kekuatan skormu bedasarkan perhitungan website kami. Untuk hasil yang lebih akurat, Silahkan melakukan Tes di lembaga resmi dan konsultasi dengan guru atau konselor pendidikan untuk pilihan program studi yang lebih akurat.
                         </div>
                     </div>
                 </div>
             `;
-            
+
             container.innerHTML = html;
         }
 
@@ -1198,16 +1217,22 @@
                 { key: 'english', name: 'Bahasa Inggris', icon: '🌐', color: '#3b82f6' },
                 { key: 'math', name: 'Matematika', icon: '🔢', color: '#f59e0b' }
             ];
-            
+
             const levelNames = [
-                'Soekarno', 'Mohammad Hatta', 'Sutan Sjahrir', // TPS
-                'Ki Hajar Dewantara', 'W.R. Supratman', 'Chairil Anwar', // Indo
-                'Cut Nyak Dien', 'R.A. Kartini', 'Sultan Hasanuddin', // English
-                'B.J. Habibie', 'Tjokro Aminoto', 'Otto Iskandardinata' // Math
+                'Soekarno', 'Mohammad Hatta', 'Sutan Sjahrir', 'Prabowo', 'Jenderal Sudirman', 'RA Kartini', 'Ki Hajar Dewantara', 'Teuku Umar', 'Cut Nyak Dien', 'Pattimura', 'Diponegoro', 'Tuanku Imam Bonjol', 'Sultan Hasanuddin', 'Cipto Mangunkusumo', 'Ahmad Dahlan', 'Hasyim Asy’ari', 'Agus Salim', 'Tan Malaka', 'Raden Saleh', 'BJ Habibie', 'Gatot Subroto', 
+                // TPS
+                'Ki Hajar Dewantara', 'W.R. Supratman', 'Chairil Anwar', 'R.M. Tirto Adhi Soerjo', 'R.A. Kartini', 'Pramoedya Ananta Toer', 'Hamka', 'Sutan Takdir Alisjahbana', 'Amir Hamzah', 'Mohammad Yamin', 'Sutan Takdir Alisyahbana', 'Ranggawarsita', 'Abdul Muis', 'Taufiq Ismail', 'Goenawan Mohamad', 'Sapardi Djoko Damono', 'WS Rendra', 'Nh. Dini', 'Asrul Sani', 'Ajip Rosidi', 'Gerson Poyk',
+                // Indonesian
+                'Martha Christina Tiahahu', 'Sam Ratulangi', 'Robert Wolter Monginsidi', 'Johannes Leimena', 'Sutan Takdir Alisjahbana', 'Nyi Ageng Serang', 'Oto Iskandar di Nata', 'Soe Hok Gie', 'Alex Kawilarang', 'Tjut Nyak Meutia', 'Roeslan Abdulgani', 'Maria Walanda Maramis', 'Silas Papare', 'Abdul Kahar Muzakir', 'Anies Baswedan', 'R.M. Tirto Adhi Soerjo', 'R.A.A. Wiranatakusumah', 'Ahmad Subardjo', 'Slamet Rijadi', 'Douwes Dekker', 'Yos Sudarso',
+                // English
+                'B.J. Habibie', 'Tjokro Aminoto', 'Otto Iskandardinata', 'Ismail Marzuki', 'Wilhelmus Zakaria Johannes', 'Mochtar Riady', 'Nurcholish Madjid', 'Har Gobind Khorana', 'Raden Ajeng Soekonto', 'R. Soeprapto', 'Soehardjo Hardjowardojo', 'Sutomo', 'R. M. Margono Djojohadikusumo', 'Soemitro Djojohadikusumo', 'Widjojo Nitisastro', 'Emil Salim', 'Subroto', 'Arief Budiman', 'Sutan Takdir Alisyahbana', 'Moeljono Sastrowirdjo', 'Mozes Kilangin',
+                // Math
+
+
             ];
-            
+
             let html = '';
-            
+
             types.forEach((type, typeIndex) => {
                 html += `
                     <div class="category-section">
@@ -1220,13 +1245,13 @@
                         </div>
                         <div class="level-items">
                 `;
-                
-                for (let level = 1; level <= 3; level++) {
+
+                for (let level = 1; level <= 21; level++) {
                     const percentage = parseInt(localStorage.getItem(`snbt_${type.key}_level${level}_percentage`)) || 0;
                     const score = parseInt(localStorage.getItem(`snbt_${type.key}_level${level}_score`)) || 0;
                     const completed = localStorage.getItem(`snbt_${type.key}_level${level}_completed`) === 'true';
-                    const heroName = levelNames[typeIndex * 3 + level - 1];
-                    
+                    const heroName = levelNames[typeIndex * 21 + level - 1];
+
                     html += `
                         <div class="level-item ${completed ? 'completed' : 'not-started'}" onclick="window.location.href='snbt.html?type=${type.key}&level=${level}'">
                             <div class="level-item-name">Level ${level}: ${heroName}</div>
@@ -1240,13 +1265,13 @@
                         </div>
                     `;
                 }
-                
+
                 html += `
                         </div>
                     </div>
                 `;
             });
-            
+
             container.innerHTML = html;
         }
 
@@ -1320,13 +1345,13 @@
             let completedLevels = 0;
             const types = ['tps', 'indo', 'english', 'math'];
             types.forEach(type => {
-                for (let level = 1; level <= 3; level++) {
+                for (let level = 1; level <= 21; level++) {
                     if (localStorage.getItem(`snbt_${type}_level${level}_completed`) === 'true') {
                         completedLevels++;
                     }
                 }
             });
-            document.getElementById('sidebarCompleted').textContent = `${completedLevels}/12`;
+            document.getElementById('sidebarCompleted').textContent = `${completedLevels}/84`;
         }
 
         // Initialize
@@ -1340,4 +1365,5 @@
         }, 5000);
     </script>
 </body>
+
 </html>
